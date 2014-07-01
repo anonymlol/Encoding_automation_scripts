@@ -36,14 +36,14 @@ if exist "Ep %folderNumber%" (
 	@echo.
 	cd "Ep %folderNumber%"
 	if exist "src.m2ts" (
-		if not exist "audio.mp4" (%audio_AAC% && @echo.)
-		if not exist "audio.flac" (%audio_FLAC% && @echo.)
-		if not exist "480.mkv" (%SD_480% && @echo. && %MuxEp_480% && @echo. && @echo.)
-		if not exist "720.mkv" (%HD_720% && @echo. && %MuxEp_720% && @echo. && @echo.)
-		if not exist "1080.mkv" (%HD_1080% && @echo. && %MuxEp_1080% && @echo. && @echo.)
-		if not exist "%folderName% - %folderNumber% 480 AAC.mkv" (%MuxEp_480% && @echo.)
-		if not exist "%folderName% - %folderNumber% 720 AAC.mkv" (%MuxEp_720% && @echo.)
-		if not exist "%folderName% - %folderNumber% 1080 FLAC.mkv" (%MuxEp_1080% && @echo.)
+		if not exist "audio.mp4" %audio_AAC% && @echo.
+		if not exist "audio.flac" %audio_FLAC% && @echo.
+		if not exist "480.mkv" %SD_480% && @echo. && %MuxEp_480% && @echo. && @echo.
+		if not exist "720.mkv" %HD_720% && @echo. && %MuxEp_720% && @echo. && @echo.
+		if not exist "1080.mkv" %HD_1080% && @echo. && %MuxEp_1080% && @echo. && @echo.
+		if not exist "%folderName% - %folderNumber% 480 AAC.mkv" %MuxEp_480% && @echo.
+		if not exist "%folderName% - %folderNumber% 720 AAC.mkv" %MuxEp_720% && @echo.
+		if not exist "%folderName% - %folderNumber% 1080 FLAC.mkv" %MuxEp_1080% && @echo.
 	)
 	@echo.
 	cd..
@@ -53,14 +53,14 @@ if exist "NCED %folderNumber%" (
 	@echo.
 	cd "NCED %folderNumber%"
 	if exist "src.m2ts" (
-		if not exist "audio.mp4" (%audio_AAC% && @echo.)
-		if not exist "audio.flac" (%audio_FLAC% && @echo.)
-		if not exist "480.mkv" (%SD_480% && @echo. && %MuxNCED_480% && @echo. && @echo.)
-		if not exist "720.mkv" (%HD_720% && @echo. && %MuxNCED_720% && @echo. && @echo.)
-		if not exist "1080.mkv" (%HD_1080% && @echo. && %MuxNCED_1080% && @echo. && @echo.)
-		if not exist "%folderName% - NCED %folderNumber% 480 AAC.mkv" (%MuxNCED_480% && @echo.)
-		if not exist "%folderName% - NCED %folderNumber% 720 AAC.mkv" (%MuxNCED_720% && @echo.)
-		if not exist "%folderName% - NCED %folderNumber% 1080 FLAC.mkv" (%MuxNCED_1080% && @echo.)
+		if not exist "audio.mp4" %audio_AAC% && @echo.
+		if not exist "audio.flac" %audio_FLAC% && @echo.
+		if not exist "480.mkv" %SD_480% && @echo. && %MuxNCED_480% && @echo. && @echo.
+		if not exist "720.mkv" %HD_720% && @echo. && %MuxNCED_720% && @echo. && @echo.
+		if not exist "1080.mkv" %HD_1080% && @echo. && %MuxNCED_1080% && @echo. && @echo.
+		if not exist "%folderName% - NCED %folderNumber% 480 AAC.mkv" %MuxNCED_480% && @echo.
+		if not exist "%folderName% - NCED %folderNumber% 720 AAC.mkv" %MuxNCED_720% && @echo.
+		if not exist "%folderName% - NCED %folderNumber% 1080 FLAC.mkv" %MuxNCED_1080% && @echo.
 	)
 	@echo.
 	cd..
@@ -87,14 +87,14 @@ if exist "Special %folderNumber%" (
 	@echo.
 	cd "Special %folderNumber%"
 	if exist "src.m2ts" (
-		if not exist "audio.mp4" (%audio_AAC% && @echo.)
-		if not exist "audio.flac" (%audio_FLAC% && @echo.)
-		if not exist "480.mkv" (%SD_480% && @echo. && %MuxSpecial_480% && @echo. && @echo.)
-		if not exist "720.mkv" (%HD_720% && @echo. && %MuxSpecial_720% && @echo. && @echo.)
-		if not exist "1080.mkv" (%HD_1080% && @echo. && %MuxSpecial_1080% && @echo. && @echo.)
-		if not exist "%folderName% - Special %folderNumber% 480 AAC.mkv" (%MuxSpecial_480% && @echo.)
-		if not exist "%folderName% - Special %folderNumber% 720 AAC.mkv" (%MuxSpecial_720% && @echo.)
-		if not exist "%folderName% - Special %folderNumber% 1080 FLAC.mkv" (%MuxSpecial_1080% && @echo.)
+		if not exist "audio.mp4" %audio_AAC% && @echo.
+		if not exist "audio.flac" %audio_FLAC% && @echo.
+		if not exist "480.mkv" %SD_480% && @echo. && %MuxSpecial_480% && @echo. && @echo.
+		if not exist "720.mkv" %HD_720% && @echo. && %MuxSpecial_720% && @echo. && @echo.
+		if not exist "1080.mkv" %HD_1080% && @echo. && %MuxSpecial_1080% && @echo. && @echo.
+		if not exist "%folderName% - Special %folderNumber% 480 AAC.mkv" %MuxSpecial_480% && @echo.
+		if not exist "%folderName% - Special %folderNumber% 720 AAC.mkv" %MuxSpecial_720% && @echo.
+		if not exist "%folderName% - Special %folderNumber% 1080 FLAC.mkv" %MuxSpecial_1080% && @echo.
 	)
 	@echo.
 	cd..
@@ -104,14 +104,14 @@ if exist "OVA %folderNumber%" (
 	@echo.
 	cd "OVA %folderNumber%"
 	if exist "src.m2ts" (
-		if not exist "audio.mp4" (%audio_AAC% && @echo.)
-		if not exist "audio.flac" (%audio_FLAC% && @echo.)
-		if not exist "480.mkv" (%SD_480% && @echo. && %MuxOVA_480% && @echo. && @echo.)
-		if not exist "720.mkv" (%HD_720% && @echo. && %MuxOVA_720% && @echo. && @echo.)
-		if not exist "1080.mkv" (%HD_1080% && @echo. && %MuxOVA_1080% && @echo. && @echo.)
-		if not exist "%folderName% - OVA %folderNumber% 480 AAC.mkv" (%MuxOVA_480% && @echo.)
-		if not exist "%folderName% - OVA %folderNumber% 720 AAC.mkv" (%MuxOVA_720% && @echo.)
-		if not exist "%folderName% - OVA %folderNumber% 1080 FLAC.mkv" (%MuxOVA_1080% && @echo.)
+		if not exist "audio.mp4" %audio_AAC% && @echo.
+		if not exist "audio.flac" %audio_FLAC% && @echo.
+		if not exist "480.mkv" %SD_480% && @echo. && %MuxOVA_480% && @echo. && @echo.
+		if not exist "720.mkv" %HD_720% && @echo. && %MuxOVA_720% && @echo. && @echo.
+		if not exist "1080.mkv" %HD_1080% && @echo. && %MuxOVA_1080% && @echo. && @echo.
+		if not exist "%folderName% - OVA %folderNumber% 480 AAC.mkv" %MuxOVA_480% && @echo.
+		if not exist "%folderName% - OVA %folderNumber% 720 AAC.mkv" %MuxOVA_720% && @echo.
+		if not exist "%folderName% - OVA %folderNumber% 1080 FLAC.mkv" %MuxOVA_1080% && @echo.
 	)
 	@echo.
 	cd..
