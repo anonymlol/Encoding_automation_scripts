@@ -19,6 +19,10 @@ SET Frameserver=%DGIndexNV%
 REM Sets the max number of episodes. Doesn't need to be changed unless you need more.
 SET Episodes=100
 
+REM If you don't have the frameserver in your path, you'll have to modify the string extraction. Example: start position --> 0,10 <-- amount of letters.
+if %Frameserver:~0,10%==DGAVCIndex SET indexFile="src.dga"
+if %Frameserver:~0,9%==DGIndexNV SET indexFile="src.dgi"
+
 for %%A in ("%CD%") do set "folderName=%%~nxA"
 @echo.
 @echo Show Name: %folderName%
@@ -48,7 +52,7 @@ if exist "Ep %folderNumber%" (
 	@echo.
 	cd "Ep %folderNumber%"
 	if exist "src.m2ts" (
-		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
+		if not exist %indexFile% @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxEp_480% && @echo. && @echo.
@@ -66,7 +70,7 @@ if exist "NCED %folderNumber%" (
 	@echo.
 	cd "NCED %folderNumber%"
 	if exist "src.m2ts" (
-		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
+		if not exist %indexFile% @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxNCED_480% && @echo. && @echo.
@@ -84,7 +88,7 @@ if exist "NCOP %folderNumber%" (
 	@echo.
 	cd "NCOP %folderNumber%"
 	if exist "src.m2ts" (
-		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
+		if not exist %indexFile% @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxNCOP_480% && @echo. && @echo.
@@ -102,7 +106,7 @@ if exist "Special %folderNumber%" (
 	@echo.
 	cd "Special %folderNumber%"
 	if exist "src.m2ts" (
-		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
+		if not exist %indexFile% @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxSpecial_480% && @echo. && @echo.
@@ -120,7 +124,7 @@ if exist "OVA %folderNumber%" (
 	@echo.
 	cd "OVA %folderNumber%"
 	if exist "src.m2ts" (
-		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
+		if not exist %indexFile% @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxOVA_480% && @echo. && @echo.
