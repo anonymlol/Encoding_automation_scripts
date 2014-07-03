@@ -1,11 +1,23 @@
 @echo off
 
+REM x264 settings
 SET SD_480=x264 --level 4.1 --colormatrix bt709 --preset veryslow --crf 15.0 --output "480.mkv" "480.avs"
 SET HD_720=x264-10bit --level 5.1 --preset veryslow --crf 15.0 --output "720.mkv" "720.avs"
 SET HD_1080=x264-10bit --level 5.1 --preset veryslow --crf 18.0 --output "1080.mkv" "1080.avs"
 
+REM eac3to settings
 SET audio_AAC=eac3to src.m2ts 2: audio.mp4 -quality=0.6
 SET audio_FLAC=eac3to src.m2ts 2: audio.flac -down16
+
+REM Defining frameservers and their indexing parameters.
+SET DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h
+SET DGIndexNV=DGIndexNV -i "src.m2ts" -o "src.dgi" -h
+
+REM Set your frameserver here. Supported ones are listed above.
+SET Frameserver=%DGIndexNV%
+
+REM Sets the max number of episodes. Doesn't need to be changed unless you need more.
+SET Episodes=100
 
 for %%A in ("%CD%") do set "folderName=%%~nxA"
 @echo.
@@ -36,6 +48,7 @@ if exist "Ep %folderNumber%" (
 	@echo.
 	cd "Ep %folderNumber%"
 	if exist "src.m2ts" (
+		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxEp_480% && @echo. && @echo.
@@ -53,6 +66,7 @@ if exist "NCED %folderNumber%" (
 	@echo.
 	cd "NCED %folderNumber%"
 	if exist "src.m2ts" (
+		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxNCED_480% && @echo. && @echo.
@@ -70,6 +84,7 @@ if exist "NCOP %folderNumber%" (
 	@echo.
 	cd "NCOP %folderNumber%"
 	if exist "src.m2ts" (
+		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxNCOP_480% && @echo. && @echo.
@@ -87,6 +102,7 @@ if exist "Special %folderNumber%" (
 	@echo.
 	cd "Special %folderNumber%"
 	if exist "src.m2ts" (
+		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxSpecial_480% && @echo. && @echo.
@@ -104,6 +120,7 @@ if exist "OVA %folderNumber%" (
 	@echo.
 	cd "OVA %folderNumber%"
 	if exist "src.m2ts" (
+		if not exist "src.dgi" @echo Indexing && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" %audio_AAC% && @echo.
 		if not exist "audio.flac" %audio_FLAC% && @echo.
 		if not exist "480.mkv" %SD_480% && @echo. && %MuxOVA_480% && @echo. && @echo.
@@ -117,5 +134,5 @@ if exist "OVA %folderNumber%" (
 	cd..
 )
 REM Number of folders to check
-if not %folderNumber% == 100 goto :loop
+if not %folderNumber% == %Episodes% goto :loop
 pause
