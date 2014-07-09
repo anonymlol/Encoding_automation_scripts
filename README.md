@@ -1,4 +1,4 @@
-### BDBatchEnc.bat ###
+### BDEnc.bat ###
 - Checks if an index file is present / Indexes if not
 - Checks if the files need to be encoded / Encodes them if they're missing
 - Checks if the files need to be muxed / Muxes them if no muxed files are present
