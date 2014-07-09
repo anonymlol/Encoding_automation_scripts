@@ -10,7 +10,7 @@ A specific folder structure is necessary. You can get a template from [here](htt
 ### TVEnc.bat ###
 Encodes, muxes, names and uploades TV encodes. 
 
-Requirements
+Requirements:
 - [wput](http://wput.sourceforge.net/) for uploading (TVEnc only)
 - [vfr.py](https://github.com/wiiaboo/vfr/releases) for trimming audio
 - Folder structure: Showname/01/TVEnc.bat
