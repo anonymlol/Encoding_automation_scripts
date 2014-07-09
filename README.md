@@ -9,3 +9,12 @@ The script does the following:
 - Numbers and names the files correctly (for example: "Showname - NCED 1 480 AAC.mkv")
 
 A specific folder structure is necessary. You can get a template from [here](https://db.tt/TmWeTOYD).
+
+TVEnc
+==========
+Encodes, muxes, names and uploades TV encodes.
+
+Folder structure: Showname/01/TVEnc.bat
+Requirements:
+[wput](http://wput.sourceforge.net/) for uploading (TVEnc only)
+[vfr.py](https://github.com/wiiaboo/vfr/releases) for trimming audio
