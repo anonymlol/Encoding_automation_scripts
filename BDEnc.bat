@@ -10,9 +10,9 @@ SET audio_AAC=eac3to src.m2ts 2: audio.mp4 -quality=0.6
 SET audio_FLAC=eac3to src.m2ts 2: audio.flac -down16
 
 REM Set your desired filename tags.
-SET Tags_480=480 AAC
-SET Tags_720=720 AAC
-SET Tags_1080=1080 FLAC
+SET Tags_480=(848x480 BD AAC)
+SET Tags_720=(1280x720 Hi10P BD AAC)
+SET Tags_1080=(1920x1080 Hi10P BD FLAC)
 
 REM Indexing settings.
 SET DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h
