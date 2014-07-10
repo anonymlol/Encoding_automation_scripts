@@ -1,56 +1,56 @@
 @echo off
 
 REM x264 settings
-SET Enc_480=x264 --level 4.1 --colormatrix bt709 --preset veryslow --crf 15.0 --log-level none --output "480.mkv" "480.avs"
-SET Enc_720=x264-10bit --level 5.1 --preset veryslow --crf 15.0 --log-level none --output "720.mkv" "720.avs"
-SET Enc_1080=x264-10bit --level 5.1 --preset veryslow --crf 18.0 --log-level none --output "1080.mkv" "1080.avs"
+set Enc_480=x264 --level 4.1 --colormatrix bt709 --preset veryslow --crf 15.0 --log-level none --output "480.mkv" "480.avs"
+set Enc_720=x264-10bit --level 5.1 --preset veryslow --crf 15.0 --log-level none --output "720.mkv" "720.avs"
+set Enc_1080=x264-10bit --level 5.1 --preset veryslow --crf 18.0 --log-level none --output "1080.mkv" "1080.avs"
 
 REM eac3to settings
-SET audio_AAC=eac3to src.m2ts 2: audio.mp4 -quality=0.6
-SET audio_FLAC=eac3to src.m2ts 2: audio.flac -down16
+set audio_AAC=eac3to src.m2ts 2: audio.mp4 -quality=0.6
+set audio_FLAC=eac3to src.m2ts 2: audio.flac -down16
 
 REM Set your desired filename tags.
-SET Tags_480=(848x480 BD AAC)
-SET Tags_720=(1280x720 Hi10P BD AAC)
-SET Tags_1080=(1920x1080 Hi10P BD FLAC)
+set Tags_480=(848x480 BD AAC)
+set Tags_720=(1280x720 Hi10P BD AAC)
+set Tags_1080=(1920x1080 Hi10P BD FLAC)
 
 REM Indexing settings.
-SET DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h
-SET DGIndexNV=DGIndexNV -i "src.m2ts" -o "src.dgi" -h
+set DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h
+set DGIndexNV=DGIndexNV -i "src.m2ts" -o "src.dgi" -h
 
 REM Set your frameserver here. Supported ones are listed above.
-SET Frameserver=%DGIndexNV%
+set Frameserver=%DGIndexNV%
 
 REM Leave this if the indexer is in your path. If it isn't, modify the string extraction to return the name of the indexer. Example: start position --> 0,10 <-- amount of letters.
-if %Frameserver:~0,10%==DGAVCIndex SET indexFile="src.dga"
-if %Frameserver:~0,9%==DGIndexNV SET indexFile="src.dgi"
+if %Frameserver:~0,10%==DGAVCIndex set indexFile="src.dga"
+if %Frameserver:~0,9%==DGIndexNV set indexFile="src.dgi"
 
 REM Max number of episodes. Doesn't need to be changed unless you need more.
-SET Episodes=100
+set Episodes=100
 
 for %%A in ("%CD%") do set "folderName=%%~nxA"
 @echo.
 @echo Show: %folderName%
 @echo.
-SET folderNumber=0
+set folderNumber=0
 :loop
-SET /a folderNumber=folderNumber+1
+set /a folderNumber=folderNumber+1
 
-SET MuxEp_480=mkvmerge -o "%folderName% - %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxEp_720=mkvmerge -o "%folderName% - %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxEp_1080=mkvmerge -o "%folderName% - %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1920x1080" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.flac" ")" "--track-order" "0:0,1:0"
-SET MuxNCED_480=mkvmerge -o "%folderName% - NCED %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxNCED_720=mkvmerge -o "%folderName% - NCED %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxNCED_1080=mkvmerge -o "%folderName% - NCED %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1920x1080" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.flac" ")" "--track-order" "0:0,1:0"
-SET MuxNCOP_480=mkvmerge -o "%folderName% - NCOP %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxNCOP_720=mkvmerge -o "%folderName% - NCOP %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxNCOP_1080=mkvmerge -o "%folderName% - NCOP %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxSpecial_480=mkvmerge -o "%folderName% - Special %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxSpecial_720=mkvmerge -o "%folderName% - Special %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxSpecial_1080=mkvmerge -o "%folderName% - Special %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1920x1080" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.flac" ")" "--track-order" "0:0,1:0"
-SET MuxOVA_480=mkvmerge -o "%folderName% - OVA %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxOVA_720=mkvmerge -o "%folderName% - OVA %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
-SET MuxOVA_1080=mkvmerge -o "%folderName% - OVA %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1920x1080" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.flac" ")" "--track-order" "0:0,1:0"
+set MuxEp_480=mkvmerge -o "%folderName% - %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxEp_720=mkvmerge -o "%folderName% - %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxEp_1080=mkvmerge -o "%folderName% - %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1920x1080" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.flac" ")" "--track-order" "0:0,1:0"
+set MuxNCED_480=mkvmerge -o "%folderName% - NCED %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxNCED_720=mkvmerge -o "%folderName% - NCED %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxNCED_1080=mkvmerge -o "%folderName% - NCED %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1920x1080" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.flac" ")" "--track-order" "0:0,1:0"
+set MuxNCOP_480=mkvmerge -o "%folderName% - NCOP %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxNCOP_720=mkvmerge -o "%folderName% - NCOP %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxNCOP_1080=mkvmerge -o "%folderName% - NCOP %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxSpecial_480=mkvmerge -o "%folderName% - Special %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxSpecial_720=mkvmerge -o "%folderName% - Special %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxSpecial_1080=mkvmerge -o "%folderName% - Special %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1920x1080" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.flac" ")" "--track-order" "0:0,1:0"
+set MuxOVA_480=mkvmerge -o "%folderName% - OVA %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:848x480" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxOVA_720=mkvmerge -o "%folderName% - OVA %folderNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1280x720" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mp4" ")" "--track-order" "0:0,1:0"
+set MuxOVA_1080=mkvmerge -o "%folderName% - OVA %folderNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:eng" "--default-track" "0:yes" "--forced-track" "0:no" "--display-dimensions" "0:1920x1080" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.flac" ")" "--track-order" "0:0,1:0"
 
 if exist "Ep %folderNumber%" (
 	@echo -----------------------------------Episode %folderNumber%-----------------------------------
