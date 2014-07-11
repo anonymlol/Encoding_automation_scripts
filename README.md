@@ -8,7 +8,7 @@
 A specific folder structure is necessary. Use this [BD Template](https://db.tt/295TS1NH).
 
 ### TVEnc.bat ###
-Encodes, muxes, names and uploades TV encodes. 
+Encodes, muxes, names and uploads TV encodes. 
 
 Needs [wput](http://wput.sourceforge.net/) for uploading and [vfr.py](https://github.com/wiiaboo/vfr/releases) for trimming the audio.
 
