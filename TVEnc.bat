@@ -57,6 +57,7 @@ if not exist "480.mkv" (
 	@echo.
 	%Upload_480%
 	@echo.
+	@echo.
 )
 
 if not exist "720.mkv" (
@@ -67,6 +68,7 @@ if not exist "720.mkv" (
 	%MuxTV_720%
 	@echo.
 	%Upload_720%
+	@echo.
 	@echo.
 )
 
