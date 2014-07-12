@@ -31,6 +31,7 @@ REM Upload settings for wput
 set Upload_480=wput --limit-rate=500K --no-directories --binary "%Showname% - %folderNumber% %Tags_480%.mkv" "ftp://%FTP_Username%:%FTP_Password%@%FTP_Host%%FTP_Path%/%folderNumber%/"
 set Upload_720=wput --limit-rate=500K --no-directories --binary "%Showname% - %folderNumber% %Tags_720%.mkv" "ftp://%FTP_Username%:%FTP_Password%@%FTP_Host%%FTP_Path%/%folderNumber%/"
 
+@echo.
 @echo Show: %Showname%
 @echo.
 
