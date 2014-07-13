@@ -1,8 +1,8 @@
 @echo off
 for %%A in ("%CD%") do set "folderNumber=%%~nxA"
 for %%A in ("%~dp0..") do set "Showname=%%~nxA"
-for %%A in (*.aac) do set "audioName=%%~nA"
-for %%A in (*[1080p].mkv) do set "mkvSource=%%~nA"
+for %%A in (*.aac) do set "audioName=%%~nxA"
+for %%A in (*[1080p].mkv) do set "mkvSource=%%~nxA"
 
 REM FTP Settings
 set FTP_Username=
@@ -15,7 +15,7 @@ set Enc_480=x264 --level 4.1 --preset veryslow --colormatrix bt709 --crf 18.0 --
 set Enc_720=x264-10bit --level 5.1 --preset veryslow --crf 18.0 --log-level none --output "720.mkv" "720.avs"
 
 REM vfr.py settings
-set Trim_audio=vfr.py -i "%audioName%.aac" -o "audio.mka" -f 24/1.001 -m "480.avs"
+set Trim_audio=vfr.py -i "%audioName%" -o "audio.mka" -f 24/1.001 -m "480.avs"
 
 REM Tags for the filename
 set Tags_480=480 AAC
@@ -40,7 +40,7 @@ if not exist "audio.mka" (
 		@echo.
 	)
 	if not exist "audio.mka" (
-		if exist "%audioName%.aac" (
+		if exist "%audioName%" (
 			@echo Trimming audio 
 			%Trim_audio%
 			@echo.
