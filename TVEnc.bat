@@ -2,7 +2,7 @@
 for %%A in ("%CD%") do set "folderNumber=%%~nxA"
 for %%A in ("%~dp0..") do set "Showname=%%~nxA"
 for %%A in (*.aac) do set "audioName=%%~nxA"
-for %%A in (*[1080p].mkv) do set "mkvSource=%%~nxA"
+for %%A in (*.mkv) do set "mkvSource=%%~nxA"
 
 REM FTP Settings
 set FTP_Username=
@@ -34,15 +34,15 @@ set Upload_720=wput --limit-rate=500K --no-directories --binary "%Showname% - %f
 @echo.
 
 if not exist "audio.mka" (
-	if exist "%mkvSource%" (
-		@echo Demuxing audio from %mkvSource%
-		mkvmerge -o "audio.mka"  "--quiet" "--language" "1:jpn" "--forced-track" "1:yes" "-a" "1" "--no-attachments" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "%mkvSource%" ")" "--track-order" "0:1"
+	if exist "%audioName%" (
+		@echo Trimming audio
+		%Trim_audio%
 		@echo.
 	)
 	if not exist "audio.mka" (
-		if exist "%audioName%" (
-			@echo Trimming audio 
-			%Trim_audio%
+		if exist "%mkvSource%" (
+			@echo Demuxing audio from %mkvSource%
+			mkvmerge -o "audio.mka"  "--quiet" "--language" "1:jpn" "--forced-track" "1:yes" "-a" "1" "--no-attachments" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "%mkvSource%" ")" "--track-order" "0:1"
 			@echo.
 		)
 	)
