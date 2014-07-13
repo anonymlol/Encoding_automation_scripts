@@ -2,6 +2,7 @@
 for %%A in ("%CD%") do set "folderNumber=%%~nxA"
 for %%A in ("%~dp0..") do set "Showname=%%~nxA"
 for %%A in (*.aac) do set "audioName=%%~nA"
+for %%A in (*[1080p].mkv) do set "mkvSource=%%~nA"
 
 REM FTP Settings
 set FTP_Username=
@@ -15,9 +16,6 @@ set Enc_720=x264-10bit --level 5.1 --preset veryslow --crf 18.0 --log-level none
 
 REM vfr.py settings
 set Trim_audio=vfr.py -i "%audioName%.aac" -o "audio.mka" -f 24/1.001 -m "480.avs"
-
-REM If you're using an mkv source (like HS), set the filename here. It's for demuxing the audio.
-set mkvSource=src
 
 REM Tags for the filename
 set Tags_480=480 AAC
@@ -36,15 +34,17 @@ set Upload_720=wput --limit-rate=500K --no-directories --binary "%Showname% - %f
 @echo.
 
 if not exist "audio.mka" (
-	if exist "%mkvSource%.mkv" (
-		@echo Demuxing audio from %mkvSource%.mkv
-		mkvmerge -o "audio.mka"  "--quiet" "--language" "1:jpn" "--forced-track" "1:yes" "-a" "1" "--no-attachments" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "%mkvSource%.mkv" ")" "--track-order" "0:1"
+	if exist "%mkvSource%" (
+		@echo Demuxing audio from %mkvSource%
+		mkvmerge -o "audio.mka"  "--quiet" "--language" "1:jpn" "--forced-track" "1:yes" "-a" "1" "--no-attachments" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "%mkvSource%" ")" "--track-order" "0:1"
 		@echo.
 	)
-	if exist "%audioName%.aac" (
-		@echo Trimming audio 
-		%Trim_audio%
-		@echo.
+	if not exist "audio.mka" (
+		if exist "%audioName%.aac" (
+			@echo Trimming audio 
+			%Trim_audio%
+			@echo.
+		)
 	)
 )
 
