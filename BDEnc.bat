@@ -71,16 +71,16 @@ if exist "Ep %episodeNumber%" (
 		if not exist "audio.mp4" @echo Encoding %folderName% - %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - %episodeNumber% 480p && %Enc_480% && @echo. && @echo.
-			if not exist "%folderName% - %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - %episodeNumber% 480p && %MuxEp_480%
+			if not exist "480.mkv" @echo Encoding %folderName% - %episodeNumber% 480p && %Enc_480% && @echo.
+			if not exist "%folderName% - %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - %episodeNumber% 480p && %MuxEp_480% && @echo. && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - %episodeNumber% 720p && %Enc_720% && @echo. && @echo.
-			if not exist "%folderName% - %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - %episodeNumber% 720p && %MuxEp_720%
+			if not exist "720.mkv" @echo Encoding %folderName% - %episodeNumber% 720p && %Enc_720% && @echo.
+			if not exist "%folderName% - %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - %episodeNumber% 720p && %MuxEp_720% && @echo. && @echo.
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p && %Enc_1080% && @echo. && @echo.
-			if not exist "%folderName% - %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - %episodeNumber% 1080p && %MuxEp_1080%
+			if not exist "1080.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p && %Enc_1080% && @echo.
+			if not exist "%folderName% - %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - %episodeNumber% 1080p && %MuxEp_1080% && @echo. && @echo.
 		)
 	)
 	@echo.
@@ -95,16 +95,16 @@ if exist "NCED %episodeNumber%" (
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCED %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - NCED %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 480p && %Enc_480% && @echo. && @echo.
-			if not exist "%folderName% - NCED %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 480p && %MuxNCED_480%
+			if not exist "480.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 480p && %Enc_480% && @echo.
+			if not exist "%folderName% - NCED %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 480p && %MuxNCED_480% && @echo. && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 720p && %Enc_720% && @echo. && @echo.
-			if not exist "%folderName% - NCED %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 720p && %MuxNCED_720%
+			if not exist "720.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 720p && %Enc_720% && @echo.
+			if not exist "%folderName% - NCED %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 720p && %MuxNCED_720% && @echo. && @echo.
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 1080p && %Enc_1080% && @echo. && @echo.
-			if not exist "%folderName% - NCED %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 1080p && %MuxNCED_1080%
+			if not exist "1080.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 1080p && %Enc_1080% && @echo.
+			if not exist "%folderName% - NCED %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 1080p && %MuxNCED_1080% && @echo. && @echo.
 		)
 	)
 	@echo.
@@ -119,16 +119,16 @@ if exist "NCOP %episodeNumber%" (
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCOP %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - NCOP %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 480p && %Enc_480% && @echo. && @echo.
-			if not exist "%folderName% - NCOP %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 480p && %MuxNCOP_480%
+			if not exist "480.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 480p && %Enc_480% && @echo.
+			if not exist "%folderName% - NCOP %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 480p && %MuxNCOP_480% && @echo. && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 720p && %Enc_720% && @echo. && @echo.
-			if not exist "%folderName% - NCOP %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 720p && %MuxNCOP_720%
+			if not exist "720.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 720p && %Enc_720% && @echo.
+			if not exist "%folderName% - NCOP %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 720p && %MuxNCOP_720% && @echo. && @echo.
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 1080p && %Enc_1080% && @echo. && @echo.
-			if not exist "%folderName% - NCOP %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 1080p && %MuxNCOP_1080%
+			if not exist "1080.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 1080p && %Enc_1080% && @echo.
+			if not exist "%folderName% - NCOP %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 1080p && %MuxNCOP_1080% && @echo. && @echo.
 		)		
 	)
 	@echo.
@@ -143,16 +143,16 @@ if exist "Special %episodeNumber%" (
 		if not exist "audio.mp4" @echo Encoding %folderName% - Special %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - Special %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - Special %episodeNumber% 480p && %Enc_480% @echo. && @echo.
-			if not exist "%folderName% - Special %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 480p && %MuxSpecial_480%
+			if not exist "480.mkv" @echo Encoding %folderName% - Special %episodeNumber% 480p && %Enc_480% @echo.
+			if not exist "%folderName% - Special %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 480p && %MuxSpecial_480% && @echo. && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - Special %episodeNumber% 720p && %Enc_720% && @echo. && @echo.
-			if not exist "%folderName% - Special %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 720p && %MuxSpecial_720%
+			if not exist "720.mkv" @echo Encoding %folderName% - Special %episodeNumber% 720p && %Enc_720% && @echo.
+			if not exist "%folderName% - Special %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 720p && %MuxSpecial_720% && @echo. && @echo.
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - Special %episodeNumber% 1080p && %Enc_1080% && @echo. && @echo.
-			if not exist "%folderName% - Special %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 1080p && %MuxSpecial_1080%
+			if not exist "1080.mkv" @echo Encoding %folderName% - Special %episodeNumber% 1080p && %Enc_1080% && @echo.
+			if not exist "%folderName% - Special %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 1080p && %MuxSpecial_1080% && @echo. && @echo.
 		)
 	)
 	@echo.
@@ -167,16 +167,16 @@ if exist "OVA %episodeNumber%" (
 		if not exist "audio.mp4" @echo Encoding %folderName% - OVA %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - OVA %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 480p && %Enc_480% && @echo. && @echo.
-			if not exist "%folderName% - OVA %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480%
+			if not exist "480.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 480p && %Enc_480% && @echo.
+			if not exist "%folderName% - OVA %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480% && @echo. && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p && %Enc_720% && @echo. && @echo.
-			if not exist "%folderName% - OVA %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480%
+			if not exist "720.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p && %Enc_720% && @echo.
+			if not exist "%folderName% - OVA %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480% && @echo. && @echo.
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 1080p && %Enc_1080% && @echo. && @echo.
-			if not exist "%folderName% - OVA %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 1080p && %MuxOVA_1080%
+			if not exist "1080.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 1080p && %Enc_1080% && @echo.
+			if not exist "%folderName% - OVA %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 1080p && %MuxOVA_1080% && @echo. && @echo.
 		)
 	)
 	@echo.
