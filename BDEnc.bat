@@ -79,7 +79,7 @@ if exist "Ep %episodeNumber%" (
 			if not exist "%folderName% - %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - %episodeNumber% 720p && %MuxEp_720%
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p && %Enc_1080%. && @echo. && @echo.
+			if not exist "1080.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p && %Enc_1080% && @echo. && @echo.
 			if not exist "%folderName% - %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - %episodeNumber% 1080p && %MuxEp_1080%
 		)
 	)
