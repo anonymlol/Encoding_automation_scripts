@@ -33,6 +33,10 @@ if %Frameserver:~0,9%==DGIndexNV set indexFile="src.dgi"
 REM Max number of episodes. Doesn't need to be changed unless you need more.
 set Episodes=100
 
+REM All m2ts files will be renamed to this. You can disable it by switching it to false.
+set renameSource=true
+set sourceName=src
+
 for %%A in ("%CD%") do set "folderName=%%~nxA"
 
 @echo.
@@ -66,7 +70,8 @@ if exist "Ep %episodeNumber%" (
 	@echo -----------------------------------Episode %episodeNumber%-----------------------------------
 	@echo.
 	cd "Ep %episodeNumber%"
-	if exist "src.m2ts" (
+	if exist *.m2ts (
+		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - %episodeNumber% FLAC && %audio_FLAC% && @echo.
@@ -90,7 +95,8 @@ if exist "NCED %episodeNumber%" (
 	@echo -----------------------------------NCED %episodeNumber%-----------------------------------
 	@echo.
 	cd "NCED %episodeNumber%"
-	if exist "src.m2ts" (
+	if exist *.m2ts (
+		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - NCED %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCED %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - NCED %episodeNumber% FLAC && %audio_FLAC% && @echo.
@@ -114,7 +120,8 @@ if exist "NCOP %episodeNumber%" (
 	@echo -----------------------------------NCOP %episodeNumber%-----------------------------------
 	@echo.
 	cd "NCOP %episodeNumber%"
-	if exist "src.m2ts" (
+	if exist *.m2ts (
+		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - NCOP %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCOP %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - NCOP %episodeNumber% FLAC && %audio_FLAC% && @echo.
@@ -138,7 +145,8 @@ if exist "Special %episodeNumber%" (
 	@echo -----------------------------------Special %episodeNumber%-----------------------------------
 	@echo.
 	cd "Special %episodeNumber%"
-	if exist "src.m2ts" (
+	if exist *.m2ts (
+		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - Special %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - Special %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - Special %episodeNumber% FLAC && %audio_FLAC% && @echo.
@@ -162,7 +170,8 @@ if exist "OVA %episodeNumber%" (
 	@echo -----------------------------------OVA %episodeNumber%-----------------------------------
 	@echo.
 	cd "OVA %episodeNumber%"
-	if exist "src.m2ts" (
+	if exist *.m2ts (
+		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - OVA %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - OVA %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - OVA %episodeNumber% FLAC && %audio_FLAC% && @echo.
