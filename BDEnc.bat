@@ -33,11 +33,12 @@ if %Frameserver:~0,9%==DGIndexNV set indexFile="src.dgi"
 REM Max number of episodes. Doesn't need to be changed unless you need more.
 set Episodes=100
 
-REM All m2ts files will be renamed to this. You can disable it by switching it to false.
+REM All m2ts files will be renamed to this. You can disable it by switching "renameSource" to false.
 set renameSource=true
 set sourceName=src
 
-REM Copy/paste avs scripts from the first folder to the others (only if they don't already exist).
+REM Copy/paste avs scripts from the first folder to the others (only if they don't already exist). You can disable it by switching "copyScripts" to false.
+set copyScripts=true
 for %%A in ("%~dp0") do set "showDir=%%~A"
 set avsDir=%showDir%Ep 01
 
@@ -75,9 +76,11 @@ if exist "Ep %episodeNumber%" (
 	@echo.
 	cd "Ep %episodeNumber%"
 	if exist *.m2ts (
-		if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-		if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-		if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		if %copyScripts%==true (
+			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - %episodeNumber% AAC && %audio_AAC% && @echo.
@@ -103,9 +106,11 @@ if exist "NCED %episodeNumber%" (
 	@echo.
 	cd "NCED %episodeNumber%"
 	if exist *.m2ts (
-		if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-		if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-		if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		if %copyScripts%==true (
+			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - NCED %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCED %episodeNumber% AAC && %audio_AAC% && @echo.
@@ -131,9 +136,11 @@ if exist "NCOP %episodeNumber%" (
 	@echo.
 	cd "NCOP %episodeNumber%"
 	if exist *.m2ts (
-		if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-		if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-		if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		if %copyScripts%==true (
+			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - NCOP %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCOP %episodeNumber% AAC && %audio_AAC% && @echo.
@@ -159,9 +166,11 @@ if exist "Special %episodeNumber%" (
 	@echo.
 	cd "Special %episodeNumber%"
 	if exist *.m2ts (
-		if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-		if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-		if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		if %copyScripts%==true (
+			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - Special %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - Special %episodeNumber% AAC && %audio_AAC% && @echo.
@@ -187,9 +196,11 @@ if exist "OVA %episodeNumber%" (
 	@echo.
 	cd "OVA %episodeNumber%"
 	if exist *.m2ts (
-		if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-		if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-		if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		if %copyScripts%==true (
+			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - OVA %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
 		if not exist "audio.mp4" @echo Encoding %folderName% - OVA %episodeNumber% AAC && %audio_AAC% && @echo.
