@@ -39,8 +39,7 @@ set sourceName=src
 
 REM Copy/paste avs scripts from the first folder to the others (only if they don't already exist). You can disable it by switching "copyScripts" to false.
 set copyScripts=true
-for %%A in ("%~dp0") do set "showDir=%%~A"
-set avsDir=%showDir%Ep 01
+set avsFolder=Ep 01
 
 for %%A in ("%CD%") do set "folderName=%%~nxA"
 
@@ -77,9 +76,9 @@ if exist "Ep %episodeNumber%" (
 	cd "Ep %episodeNumber%"
 	if exist *.m2ts (
 		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
@@ -107,9 +106,9 @@ if exist "NCED %episodeNumber%" (
 	cd "NCED %episodeNumber%"
 	if exist *.m2ts (
 		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - NCED %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
@@ -137,9 +136,9 @@ if exist "NCOP %episodeNumber%" (
 	cd "NCOP %episodeNumber%"
 	if exist *.m2ts (
 		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - NCOP %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
@@ -167,9 +166,9 @@ if exist "Special %episodeNumber%" (
 	cd "Special %episodeNumber%"
 	if exist *.m2ts (
 		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - Special %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
@@ -197,9 +196,9 @@ if exist "OVA %episodeNumber%" (
 	cd "OVA %episodeNumber%"
 	if exist *.m2ts (
 		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%avsDir%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%avsDir%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%avsDir%\1080.avs" && @echo.
+			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - OVA %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
