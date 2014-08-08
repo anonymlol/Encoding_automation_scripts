@@ -9,7 +9,7 @@
 A specific folder structure is necessary. Use this [BD Template](https://db.tt/295TS1NH).
 
 ### BDEncEp.bat ###
-Same as BDEnc, except it only works for a single folder. Copying .avs from previous folders not supported (yet?). Use the same BD Template as for BDEnc.bat.
+Same as BDEnc, except it only works for a single folder. Copying .avs from previous folders not supported (yet?). Use the same BD Template as for BDEnc.
 
 ### TVEnc.bat ###
 Encodes, muxes, names and uploads TV encodes. 
