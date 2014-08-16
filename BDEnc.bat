@@ -6,12 +6,12 @@ set Enc_720=x264-10bit --level 5.1 --preset veryslow --crf 15.0 --log-level none
 set Enc_1080=x264-10bit --level 5.1 --preset veryslow --crf 18.0 --log-level none --output "1080.mkv" "1080.avs"
 
 REM eac3to settings
-set audio_AAC=eac3to src.m2ts 2: audio.mp4 -quality=0.6
+set audio_AAC=eac3to src.m2ts 2: audio.m4a -quality=0.6
 set audio_FLAC=eac3to src.m2ts 2: audio.flac -down16
 
 REM Set audio for each resolution (muxing). Extensions only.
-set audio_480=mp4
-set audio_720=mp4
+set audio_480=m4a
+set audio_720=m4a
 set audio_1080=flac
 
 REM Set your desired filename tags.
