@@ -18,7 +18,7 @@ set audio_720=mp4
 set audio_1080=flac
 
 REM Set your desired filename tags.
-set Tags_480=(848x480 BD AAC)
+set Tags_480=(848x480 h264 BD AAC)
 set Tags_720=(1280x720 Hi10P BD AAC)
 set Tags_1080=(1920x1080 Hi10P BD FLAC)
 
