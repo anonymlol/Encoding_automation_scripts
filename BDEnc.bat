@@ -9,6 +9,10 @@ REM eac3to settings
 set audio_AAC=eac3to src.m2ts 2: audio.mp4 -quality=0.6
 set audio_FLAC=eac3to src.m2ts 2: audio.flac -down16
 
+REM eac3to pgs (.sup) demux settings, switch to "true" and adjust the track number (:5) accordingly if you want to enable it.
+set sub_demux=false
+set subs_pgs=eac3to src.m2ts 5: subs_1080.sup
+
 REM Set audio for each resolution (muxing). Extensions only.
 set audio_480=mp4
 set audio_720=mp4
@@ -91,6 +95,7 @@ if exist "Ep %episodeNumber%" (
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
@@ -121,6 +126,7 @@ if exist "NCED %episodeNumber%" (
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - NCED %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - NCED %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCED %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - NCED %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
@@ -151,6 +157,7 @@ if exist "NCOP %episodeNumber%" (
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - NCOP %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - NCOP %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCOP %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - NCOP %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
@@ -181,6 +188,7 @@ if exist "Special %episodeNumber%" (
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - Special %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - Special %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - Special %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - Special %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
@@ -211,6 +219,7 @@ if exist "OVA %episodeNumber%" (
 		)
 		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 		if not exist %indexFile% @echo Indexing %folderName% - OVA %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - OVA %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - OVA %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - OVA %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if exist "480.avs" (
