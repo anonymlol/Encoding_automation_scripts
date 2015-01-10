@@ -32,6 +32,10 @@ set audio_track_name_480=AAC
 set audio_track_name_720=AAC
 set audio_track_name_1080=FLAC
 
+REM Create pass files? Change to "true" to enable it. You can find xvid_encraw.exe in your megui folder
+set passfile=false
+set passfile_settings=xvid_encraw -i pass.avs -type 2 -pass1 passfile.pass -full1pass -progress 21
+
 REM Indexing settings.
 set DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h
 set DGIndexNV=DGIndexNV -i "src.m2ts" -o "src.dgi" -h
@@ -101,6 +105,8 @@ if exist "Ep %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - %episodeNumber% 480p && %Enc_480% && @echo.
 			if not exist "%folderName% - %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - %episodeNumber% 480p && %MuxEp_480% && @echo. && @echo.
+			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - %episodeNumber% 720p && %Enc_720% && @echo.
@@ -132,6 +138,8 @@ if exist "NCED %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 480p && %Enc_480% && @echo.
 			if not exist "%folderName% - NCED %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 480p && %MuxNCED_480% && @echo. && @echo.
+			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 720p && %Enc_720% && @echo.
@@ -163,6 +171,8 @@ if exist "NCOP %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 480p && %Enc_480% && @echo.
 			if not exist "%folderName% - NCOP %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 480p && %MuxNCOP_480% && @echo. && @echo.
+			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 720p && %Enc_720% && @echo.
@@ -194,6 +204,8 @@ if exist "Special %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - Special %episodeNumber% 480p && %Enc_480% @echo.
 			if not exist "%folderName% - Special %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 480p && %MuxSpecial_480% && @echo. && @echo.
+			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - Special %episodeNumber% 720p && %Enc_720% && @echo.
@@ -225,6 +237,8 @@ if exist "OVA %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 480p && %Enc_480% && @echo.
 			if not exist "%folderName% - OVA %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480% && @echo. && @echo.
+			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p && %Enc_720% && @echo.

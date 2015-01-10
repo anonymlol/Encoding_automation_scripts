@@ -31,6 +31,10 @@ set audio_track_name_480=AAC
 set audio_track_name_720=AAC
 set audio_track_name_1080=FLAC
 
+REM Create pass files? Change to "true" to enable it. You can find xvid_encraw.exe in your megui folder
+set passfile=false
+set passfile_settings=xvid_encraw -i pass.avs -type 2 -pass1 passfile.pass -full1pass -progress 21
+
 REM Indexing settings.
 set DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h
 set DGIndexNV=DGIndexNV -i "src.m2ts" -o "src.dgi" -h
@@ -45,10 +49,6 @@ if %Frameserver:~0,9%==DGIndexNV set indexFile="src.dgi"
 REM All m2ts files will be renamed to this. You can disable it by switching "renameSource" to false.
 set renameSource=true
 set sourceName=src
-
-REM Copy/paste avs scripts from the first folder to the others (only if they don't already exist). You can disable it by switching "copyScripts" to false.
-REM set copyScripts=true
-REM set avsFolder=Ep 01
 
 if %folderName:~0,2%==Ep (
 	set epNumber=%folderName:~-2,2%
@@ -65,11 +65,6 @@ set Mux_1080=mkvmerge -o "%Showname% - %epNumber% %Tags_1080%.mkv"  "--quiet" "-
 @echo.
 
 if exist *.m2ts (
-	REM if %copyScripts%==true (
-		REM if not exist "480.avs" xcopy "%~dp0..%avsFolder%\480.avs" && @echo.
-		REM if not exist "720.avs" xcopy "%~dp0..%avsFolder%\720.avs" && @echo.
-		REM if not exist "1080.avs" xcopy "%~dp0..%avsFolder%\1080.avs" && @echo.
-	REM )
 	if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
 	if not exist %indexFile% @echo Indexing %Showname% - %epNumber% && %Frameserver% && @echo Indexing done && @echo.
 	if not exist "audio.mp4" @echo Encoding %Showname% - %epNumber% AAC && %audio_AAC% && @echo.
@@ -77,6 +72,8 @@ if exist *.m2ts (
 	if exist "480.avs" (
 		if not exist "480.mkv" @echo Encoding %Showname% - %epNumber% 480p && %Enc_480% && @echo.
 		if not exist "%Showname% - %epNumber% %Tags_480%.mkv" @echo Muxing %Showname% - %epNumber% 480p && %Mux_480% && @echo. && @echo.
+		if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
+		if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
 	)
 	if exist "720.avs" (
 		if not exist "720.mkv" @echo Encoding %Showname% - %epNumber% 720p && %Enc_720% && @echo.
