@@ -72,8 +72,8 @@ if exist *.m2ts (
 	if exist "480.avs" (
 		if not exist "480.mkv" @echo Encoding %Showname% - %epNumber% 480p && %Enc_480% && @echo.
 		if not exist "%Showname% - %epNumber% %Tags_480%.mkv" @echo Muxing %Showname% - %epNumber% 480p && %Mux_480% && @echo. && @echo.
-		if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
-		if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
+		if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+		if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 	)
 	if exist "720.avs" (
 		if not exist "720.mkv" @echo Encoding %Showname% - %epNumber% 720p && %Enc_720% && @echo.

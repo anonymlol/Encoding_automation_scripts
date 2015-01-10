@@ -105,8 +105,8 @@ if exist "Ep %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - %episodeNumber% 480p && %Enc_480% && @echo.
 			if not exist "%folderName% - %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - %episodeNumber% 480p && %MuxEp_480% && @echo. && @echo.
-			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
+			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - %episodeNumber% 720p && %Enc_720% && @echo.
@@ -138,8 +138,8 @@ if exist "NCED %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 480p && %Enc_480% && @echo.
 			if not exist "%folderName% - NCED %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 480p && %MuxNCED_480% && @echo. && @echo.
-			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
+			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 720p && %Enc_720% && @echo.
@@ -171,8 +171,8 @@ if exist "NCOP %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 480p && %Enc_480% && @echo.
 			if not exist "%folderName% - NCOP %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 480p && %MuxNCOP_480% && @echo. && @echo.
-			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
+			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 720p && %Enc_720% && @echo.
@@ -204,8 +204,8 @@ if exist "Special %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - Special %episodeNumber% 480p && %Enc_480% @echo.
 			if not exist "%folderName% - Special %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 480p && %MuxSpecial_480% && @echo. && @echo.
-			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
+			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - Special %episodeNumber% 720p && %Enc_720% && @echo.
@@ -237,8 +237,8 @@ if exist "OVA %episodeNumber%" (
 		if exist "480.avs" (
 			if not exist "480.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 480p && %Enc_480% && @echo.
 			if not exist "%folderName% - OVA %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480% && @echo. && @echo.
-			if %passfile%==true if not exist "Pass.avs" @echo DirectShowSource^("480.mkv"^)> Pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del Pass.avs && @echo.
+			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p && %Enc_720% && @echo.
