@@ -4,6 +4,8 @@
 - Indexes the source
 - Encodes audio
 - Encodes video
+- demuxes PGS subs
+- creates pass files
 - Muxes (with correct names/numbers fetched from the folders, for example: "Showname - NCED 01 480 AAC.mkv")
 
 A specific folder structure is necessary. Use this [BD Template](https://db.tt/295TS1NH).
