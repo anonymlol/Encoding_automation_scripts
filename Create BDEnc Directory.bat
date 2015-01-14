@@ -24,7 +24,7 @@ set /p SpecialCount=Enter Number of Specials:
 @echo %SpecialCount%|findstr /xr "[1-9][0-9]* 0" >nul && (
 	@echo. ) || (
 	@echo Not a valid number!
-	goto :RetryNCCount
+	goto :RetrySpecialCount
 )
 
 :RetryOVACount
@@ -32,7 +32,7 @@ set /p OVACount=Enter Number of OVAs:
 @echo %OVACount%|findstr /xr "[1-9][0-9]* 0" >nul && (
 	@echo. ) || (
 	@echo Not a valid number!
-	goto :RetryNCCount
+	goto :RetryOVACount
 )
 
 if not exist %FolderName% md %FolderName%
