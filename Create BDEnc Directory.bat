@@ -1,5 +1,7 @@
 @echo off
 
+REM Place it in your encoding folder and start it whenever you need a new directory for a new show (or additional folders in an existing one).
+
 set /p FolderName=Enter Showname:
 @echo.
 
