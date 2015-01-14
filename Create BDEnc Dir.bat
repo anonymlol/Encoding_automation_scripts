@@ -2,7 +2,7 @@
 
 REM Place it in your encoding folder and start it whenever you need a directory for a new show (or additional folders in an existing one).
 
-set /p FolderName=Enter Showname:
+set /p FolderName="Enter Showname: "
 @echo.
 
 :RetryEpCount
@@ -14,7 +14,7 @@ set /p EpisodeCount=Enter Number of Episodes:
 )
 
 :RetryNCCount
-set /p NCCount=Enter Number of NCEDs/NCOPs:
+set /p NCCount="Enter Number of NCEDs/NCOPs: "
 @echo %NCCount%|findstr /xr "[1-9][0-9]* 0" >nul && (
 	@echo. ) || (
 	@echo Not a valid number!
@@ -22,7 +22,7 @@ set /p NCCount=Enter Number of NCEDs/NCOPs:
 )
 
 :RetrySpecialCount
-set /p SpecialCount=Enter Number of Specials:
+set /p SpecialCount="Enter Number of Specials: "
 @echo %SpecialCount%|findstr /xr "[1-9][0-9]* 0" >nul && (
 	@echo. ) || (
 	@echo Not a valid number!
@@ -30,14 +30,14 @@ set /p SpecialCount=Enter Number of Specials:
 )
 
 :RetryOVACount
-set /p OVACount=Enter Number of OVAs:
+set /p OVACount="Enter Number of OVAs: "
 @echo %OVACount%|findstr /xr "[1-9][0-9]* 0" >nul && (
 	@echo. ) || (
 	@echo Not a valid number!
 	goto :RetryOVACount
 )
 
-if not exist %FolderName% md %FolderName%
+if not exist "%FolderName%" md "%FolderName%"
 cd %FolderName%
 
 set Episode_Counter=0
