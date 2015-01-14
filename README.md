@@ -8,7 +8,7 @@
 - creates pass files
 - Muxes (with correct names/numbers fetched from the folders, for example: "Showname - NCED 01 480 AAC.mkv")
 
-A specific folder structure is necessary. Use this [BD Template](https://db.tt/295TS1NH) or the new "Create BDEnc Directory.bat".
+A specific folder structure is necessary. Use this [BD Template](https://db.tt/295TS1NH) or the new "[Create BDEnc Directory.bat](https://github.com/anonymlol/Encoding_automation_scripts/blob/master/Create%20BDEnc%20Directory.bat)".
 
 ### BDEncEp.bat ###
 Same as BDEnc, except it only works for a single folder. Copying .avs from previous folders not supported (yet?). Use the same BD Template as for BDEnc.
