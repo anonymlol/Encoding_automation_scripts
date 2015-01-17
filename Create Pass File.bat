@@ -5,8 +5,6 @@ REM Make sure your xvid_encraw path is correct. You can find xvid_encraw in your
 
 if not exist pass.avs @echo DirectShowSource(%1) > pass.avs
 xvid_encraw -i pass.avs -type 2 -pass1 passfile.pass -full1pass -progress 21
-
-REM If you don't want to keep the pass.avs after the passfile has been created, uncomment the line below
-REM if exist pass.avs del pass.avs
+del pass.avs
 
 REM pause
