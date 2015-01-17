@@ -242,7 +242,7 @@ if exist "OVA %episodeNumber%" (
 		)
 		if exist "720.avs" (
 			if not exist "720.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p && %Enc_720% && @echo.
-			if not exist "%folderName% - OVA %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480% && @echo. && @echo.
+			if not exist "%folderName% - OVA %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 720p && %MuxOVA_720% && @echo. && @echo.
 		)
 		if exist "1080.avs" (
 			if not exist "1080.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 1080p && %Enc_1080% && @echo.
