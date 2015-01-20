@@ -41,7 +41,7 @@ set Upload_480=wput --limit-rate=500K --no-directories --binary "%Showname% - %f
 set Upload_720=wput --limit-rate=500K --no-directories --binary "%Showname% - %folderNumber% %Tags_720%.mkv" "ftp://%FTP_Username%:%FTP_Password%@%FTP_Host%%FTP_Path%/%folderNumber%/"
 
 @echo.
-@echo Show: %Showname%
+@echo Show: "%Showname%"
 @echo.
 
 if not exist "audio.mka" (
@@ -60,10 +60,10 @@ if not exist "audio.mka" (
 )
 
 if not exist "480.mkv" (
-	@echo ------------------%Showname% - %folderNumber% %Tags_480%------------------
+	@echo ------------------"%Showname% - %folderNumber% %Tags_480%"------------------
 	%Enc_480%
 	@echo.
-	@echo Muxing %Showname% - %folderNumber% %Tags_480%
+	@echo Muxing "%Showname% - %folderNumber% %Tags_480%"
 	%MuxTV_480%
 	@echo.
 	%Upload_480%
@@ -76,10 +76,10 @@ if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %pa
 
 
 if not exist "720.mkv" (
-	@echo ------------------%Showname% - %folderNumber% %Tags_720%------------------
+	@echo ------------------"%Showname% - %folderNumber% %Tags_720%"------------------
 	%Enc_720% 
 	@echo.
-	@echo Muxing %Showname% - %folderNumber% %Tags_720%
+	@echo Muxing "%Showname% - %folderNumber% %Tags_720%"
 	%MuxTV_720%
 	@echo.
 	%Upload_720%
