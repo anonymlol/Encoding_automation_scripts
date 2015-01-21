@@ -61,27 +61,27 @@ set Mux_720=mkvmerge -o "%Showname% - %epNumber% %Tags_720%.mkv"  "--quiet" "--l
 set Mux_1080=mkvmerge -o "%Showname% - %epNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
 
 @echo.
-@echo --------------------------------"%Showname% %epNumber%"--------------------------------
+@echo --------------------------------%Showname% %epNumber%--------------------------------
 @echo.
 
 if exist *.m2ts (
 	if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
-	if not exist %indexFile% @echo Indexing "%Showname% - %epNumber%" && %Frameserver% && @echo Indexing done && @echo.
-	if not exist "audio.mp4" @echo Encoding "%Showname% - %epNumber% AAC" && %audio_AAC% && @echo.
-	if not exist "audio.flac" @echo Encoding "%Showname% - %epNumber% FLAC" && %audio_FLAC% && @echo.
+	if not exist %indexFile% @echo Indexing %Showname% - %epNumber% && %Frameserver% && @echo Indexing done && @echo.
+	if not exist "audio.mp4" @echo Encoding %Showname% - %epNumber% AAC && %audio_AAC% && @echo.
+	if not exist "audio.flac" @echo Encoding %Showname% - %epNumber% FLAC && %audio_FLAC% && @echo.
 	if exist "480.avs" (
-		if not exist "480.mkv" @echo Encoding "%Showname% - %epNumber% 480p" && %Enc_480% && @echo.
-		if not exist "%Showname% - %epNumber% %Tags_480%.mkv" @echo Muxing "%Showname% - %epNumber% 480p" && %Mux_480% && @echo. && @echo.
+		if not exist "480.mkv" @echo Encoding %Showname% - %epNumber% 480p && %Enc_480% && @echo.
+		if not exist "%Showname% - %epNumber% %Tags_480%.mkv" @echo Muxing %Showname% - %epNumber% 480p && %Mux_480% && @echo. && @echo.
 		if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
 		if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 	)
 	if exist "720.avs" (
-		if not exist "720.mkv" @echo Encoding "%Showname% - %epNumber% 720p" && %Enc_720% && @echo.
-		if not exist "%Showname% - %epNumber% %Tags_720%.mkv" @echo Muxing "%Showname% - %epNumber% 720p" && %Mux_720% && @echo. && @echo.
+		if not exist "720.mkv" @echo Encoding %Showname% - %epNumber% 720p && %Enc_720% && @echo.
+		if not exist "%Showname% - %epNumber% %Tags_720%.mkv" @echo Muxing %Showname% - %epNumber% 720p && %Mux_720% && @echo. && @echo.
 	)
 	if exist "1080.avs" (
-		if not exist "1080.mkv" @echo Encoding "%Showname% - %epNumber% 1080p" && %Enc_1080% && @echo.
-		if not exist "%Showname% - %epNumber% %Tags_1080%.mkv" @echo Muxing "%Showname% - %epNumber% 1080p" && %Mux_1080% && @echo. && @echo.
+		if not exist "1080.mkv" @echo Encoding %Showname% - %epNumber% 1080p && %Enc_1080% && @echo.
+		if not exist "%Showname% - %epNumber% %Tags_1080%.mkv" @echo Muxing %Showname% - %epNumber% 1080p && %Mux_1080% && @echo. && @echo.
 	)
 )
 
