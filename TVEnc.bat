@@ -87,7 +87,7 @@ if not exist "720.mkv" (
 	@echo.
 )
 
-if not exist "%Showname% - %folderNumber% %Tags_480%.mkv" @echo Muxing "%Showname% - %folderNumber% %Tags_480%" && %MuxTV_480%
-if not exist "%Showname% - %folderNumber% %Tags_720%.mkv" @echo Muxing "%Showname% - %folderNumber% %Tags_720%" && %MuxTV_720%
+if not exist "%Showname% - %folderNumber% %Tags_480%.mkv" @echo Muxing %Showname% - %folderNumber% %Tags_480% && %MuxTV_480%
+if not exist "%Showname% - %folderNumber% %Tags_720%.mkv" @echo Muxing %Showname% - %folderNumber% %Tags_720% && %MuxTV_720%
 
 pause
