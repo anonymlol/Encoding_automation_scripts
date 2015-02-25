@@ -1,9 +1,21 @@
 @echo off
 
 REM x264 settings
-set Enc_480=x264 --level 4.1 --colormatrix bt709 --preset veryslow --crf 15.0 --log-level none --output "480.mkv" "480.avs"
-set Enc_720=x264-10bit --level 5.1 --preset veryslow --crf 15.0 --log-level none --output "720.mkv" "720.avs"
-set Enc_1080=x264-10bit --level 5.1 --preset veryslow --crf 18.0 --log-level none --output "1080.mkv" "1080.avs"
+set x264_480=avs4x26x -L "x264_64" --level 4.1 --colormatrix bt709 --preset veryslow --crf 15.0 --log-level none --output "480.mkv" "480.avs"
+set x264_720=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 16.0 --input-depth 16 --log-level none --output "720.mkv" "720.avs"
+set x264_1080=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 18.0 --input-depth 16 --log-level none --output "1080.mkv" "1080.avs"
+
+REM x265 settings
+set x265_720=avs4x26x -L "x265" --preset veryslow --crf 16.0 --input-depth 16 --recon-depth 10 --log-level none --output "720_hevc.mkv" "720.avs"
+set x265_1080=avs4x26x -L "x265" --preset veryslow --crf 16.0 --input-depth 16 --recon-depth 10 --log-level none --output "1080_hevc.mkv" "1080.avs"
+
+REM Enable/Disable encodes
+set encode_x264_480=true
+set encode_x264_720=true
+set encode_x264_1080=true
+
+set encode_x265_720=false
+set encode_x265_1080=false
 
 REM eac3to settings
 set audio_AAC=eac3to src.m2ts 2: audio.mp4 -quality=0.6
@@ -19,14 +31,20 @@ set audio_720=mp4
 set audio_1080=flac
 
 REM Set your desired filename tags.
-set Tags_480=(848x480 h264 BD AAC)
-set Tags_720=(1280x720 Hi10P BD AAC)
-set Tags_1080=(1920x1080 Hi10P BD FLAC)
+set Tags_480_x264=(848x480 h264 BD AAC)
+set Tags_720_x264=(1280x720 Hi10P BD AAC)
+set Tags_1080_x264=(1920x1080 Hi10P BD FLAC)
+
+set Tags_720_x265=(1280x720 HEVC BD AAC)
+set Tags_1080_x265=(1920x1080 HEVC BD FLAC)
 
 REM Track-names when muxing.
-set video_track_name_480=AVC
-set video_track_name_720=AVC
-set video_track_name_1080=AVC
+set video_track_name_480_x264=AVC
+set video_track_name_720_x264=AVC
+set video_track_name_1080_x264=AVC
+
+set video_track_name_720_x265=HEVC
+set video_track_name_1080_x265=HEVC
 
 set audio_track_name_480=AAC
 set audio_track_name_720=AAC
@@ -75,21 +93,34 @@ set /a folderCount=folderCount+1
 if %folderCount% LSS 10 set episodeNumber=0%folderCount%
 if %folderCount% GEQ 10 set episodeNumber=%folderCount%
 
-set MuxEp_480=mkvmerge -o "%folderName% - %episodeNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxEp_720=mkvmerge -o "%folderName% - %episodeNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxEp_1080=mkvmerge -o "%folderName% - %episodeNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxNCED_480=mkvmerge -o "%folderName% - NCED %episodeNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxNCED_720=mkvmerge -o "%folderName% - NCED %episodeNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxNCED_1080=mkvmerge -o "%folderName% - NCED %episodeNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxNCOP_480=mkvmerge -o "%folderName% - NCOP %episodeNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxNCOP_720=mkvmerge -o "%folderName% - NCOP %episodeNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxNCOP_1080=mkvmerge -o "%folderName% - NCOP %episodeNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxSpecial_480=mkvmerge -o "%folderName% - Special %episodeNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxSpecial_720=mkvmerge -o "%folderName% - Special %episodeNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxSpecial_1080=mkvmerge -o "%folderName% - Special %episodeNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxOVA_480=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxOVA_720=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_720%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
-set MuxOVA_1080=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_1080%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+REM x264 Mux
+set MuxEp_480_x264=mkvmerge -o "%folderName% - %episodeNumber% %Tags_480_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxEp_720_x264=mkvmerge -o "%folderName% - %episodeNumber% %Tags_720_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxEp_1080_x264=mkvmerge -o "%folderName% - %episodeNumber% %Tags_1080_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCED_480_x264=mkvmerge -o "%folderName% - NCED %episodeNumber% %Tags_480_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCED_720_x264=mkvmerge -o "%folderName% - NCED %episodeNumber% %Tags_720_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCED_1080_x264=mkvmerge -o "%folderName% - NCED %episodeNumber% %Tags_1080_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCOP_480_x264=mkvmerge -o "%folderName% - NCOP %episodeNumber% %Tags_480_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCOP_720_x264=mkvmerge -o "%folderName% - NCOP %episodeNumber% %Tags_720_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCOP_1080_x264=mkvmerge -o "%folderName% - NCOP %episodeNumber% %Tags_1080_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxSpecial_480_x264=mkvmerge -o "%folderName% - Special %episodeNumber% %Tags_480_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxSpecial_720_x264=mkvmerge -o "%folderName% - Special %episodeNumber% %Tags_720_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxSpecial_1080_x264=mkvmerge -o "%folderName% - Special %episodeNumber% %Tags_1080_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxOVA_480_x264=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_480_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_480%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxOVA_720_x264=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_720_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxOVA_1080_x264=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_1080_x264%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x264%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+
+REM x265 Mux
+set MuxEp_720_x265=mkvmerge -o "%folderName% - %episodeNumber% %Tags_720_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxEp_1080_x265=mkvmerge -o "%folderName% - %episodeNumber% %Tags_1080_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCED_720_x265=mkvmerge -o "%folderName% - NCED %episodeNumber% %Tags_720_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCED_1080_x265=mkvmerge -o "%folderName% - NCED %episodeNumber% %Tags_1080_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCOP_720_x265=mkvmerge -o "%folderName% - NCOP %episodeNumber% %Tags_720_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxNCOP_1080_x265=mkvmerge -o "%folderName% - NCOP %episodeNumber% %Tags_1080_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxSpecial_720_x265=mkvmerge -o "%folderName% - Special %episodeNumber% %Tags_720_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxSpecial_1080_x265=mkvmerge -o "%folderName% - Special %episodeNumber% %Tags_1080_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxOVA_720_x265=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_720_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_720_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "720_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_720%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_720%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
+set MuxOVA_1080_x265=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_1080_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
 
 if exist "Ep %episodeNumber%" (
 	@echo -----------------------------------Episode %episodeNumber%-----------------------------------
@@ -109,23 +140,38 @@ if exist "Ep %episodeNumber%" (
 		if not exist "audio.flac" @echo Encoding %folderName% - %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - %episodeNumber% 480p && %Enc_480% && @echo.
-			if not exist "%folderName% - %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - %episodeNumber% 480p && %MuxEp_480% && @echo. && @echo.
+			if %encode_x264_480%==true (
+                if not exist "480.mkv" @echo Encoding %folderName% - %episodeNumber% 480p && %x264_480% && @echo.
+                if not exist "%folderName% - %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - %episodeNumber% 480p && %MuxEp_480_x264% && @echo. && @echo.
+            )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
 			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - %episodeNumber% 720p && %Enc_720% && @echo.
-			if not exist "%folderName% - %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - %episodeNumber% 720p && %MuxEp_720% && @echo. && @echo.
+			if %encode_x264_720%==true (
+                if not exist "720.mkv" @echo Encoding %folderName% - %episodeNumber% 720p && %x264_720% && @echo.
+                if not exist "%folderName% - %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - %episodeNumber% 720p && %MuxEp_720_x264% && @echo. && @echo.
+            )
+			if %encode_x265_720%==true (
+                if not exist "720_hevc.mkv" @echo Encoding %folderName% - %episodeNumber% 720p HEVC && %x265_720% && @echo.
+                if not exist "%folderName% - %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - %episodeNumber% 720p HEVC && %MuxEp_720_x265% && @echo. && @echo.
+            )
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p && %Enc_1080% && @echo.
-			if not exist "%folderName% - %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - %episodeNumber% 1080p && %MuxEp_1080% && @echo. && @echo.
+			if %encode_x264_1080%==true (
+                if not exist "1080.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p && %x264_1080% && @echo.
+                if not exist "%folderName% - %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - %episodeNumber% 1080p && %MuxEp_1080_x264% && @echo. && @echo.
+            )
+			if %encode_x265_1080%==true (
+                if not exist "1080_hevc.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
+                if not exist "%folderName% - %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - %episodeNumber% 1080p HEVC && %MuxEp_1080_x265% && @echo. && @echo.
+            )
 		)
 	)
 	@echo.
 	cd..
 )
+
 if exist "NCED %episodeNumber%" (
 	@echo -----------------------------------NCED %episodeNumber%-----------------------------------
 	@echo.
@@ -144,18 +190,32 @@ if exist "NCED %episodeNumber%" (
 		if not exist "audio.flac" @echo Encoding %folderName% - NCED %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 480p && %Enc_480% && @echo.
-			if not exist "%folderName% - NCED %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 480p && %MuxNCED_480% && @echo. && @echo.
+			if %encode_x264_480%==true (
+                if not exist "480.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 480p && %x264_480% && @echo.
+                if not exist "%folderName% - NCED %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 480p && %MuxNCED_480_x264% && @echo. && @echo.
+            )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
 			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 720p && %Enc_720% && @echo.
-			if not exist "%folderName% - NCED %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 720p && %MuxNCED_720% && @echo. && @echo.
+			if %encode_x264_720%==true (
+                if not exist "720.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 720p && %x264_720% && @echo.
+                if not exist "%folderName% - NCED %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 720p && %MuxNCED_720_x264% && @echo. && @echo.
+            )
+			if %encode_x265_720%==true (
+                if not exist "720_hevc.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 720p HEVC && %x265_720% && @echo.
+                if not exist "%folderName% - NCED %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 720p HEVC && %MuxNCED_720_x265% && @echo. && @echo.
+            )
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 1080p && %Enc_1080% && @echo.
-			if not exist "%folderName% - NCED %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 1080p && %MuxNCED_1080% && @echo. && @echo.
+			if %encode_x264_1080%==true (
+                if not exist "1080.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 1080p && %x264_1080% && @echo.
+                if not exist "%folderName% - NCED %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 1080p && %MuxNCED_1080_x264% && @echo. && @echo.
+            )
+			if %encode_x265_1080%==true (
+                if not exist "1080_hevc.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
+                if not exist "%folderName% - NCED %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 1080p HEVC && %MuxNCED_1080_x265% && @echo. && @echo.
+            )
 		)
 	)
 	@echo.
@@ -179,18 +239,32 @@ if exist "NCOP %episodeNumber%" (
 		if not exist "audio.flac" @echo Encoding %folderName% - NCOP %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 480p && %Enc_480% && @echo.
-			if not exist "%folderName% - NCOP %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 480p && %MuxNCOP_480% && @echo. && @echo.
+			if %encode_x264_480%==true (
+                if not exist "480.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 480p && %x264_480% && @echo.
+                if not exist "%folderName% - NCOP %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 480p && %MuxNCOP_480_x264% && @echo. && @echo.
+            )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
 			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 720p && %Enc_720% && @echo.
-			if not exist "%folderName% - NCOP %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 720p && %MuxNCOP_720% && @echo. && @echo.
+			if %encode_x264_720%==true (
+                if not exist "720.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 720p && %x264_720% && @echo.
+                if not exist "%folderName% - NCOP %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 720p && %MuxNCOP_720_x264% && @echo. && @echo.
+            )
+			if %encode_x265_720%==true (
+                if not exist "720_hevc.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 720p HEVC && %x265_720% && @echo.
+                if not exist "%folderName% - NCOP %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 720p HEVC && %MuxNCOP_720_x265% && @echo. && @echo.
+            )
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 1080p && %Enc_1080% && @echo.
-			if not exist "%folderName% - NCOP %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 1080p && %MuxNCOP_1080% && @echo. && @echo.
+			if %encode_x264_1080%==true (
+                if not exist "1080.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 1080p && %x264_1080% && @echo.
+                if not exist "%folderName% - NCOP %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 1080p && %MuxNCOP_1080_x264% && @echo. && @echo.
+            )
+			if %encode_x265_1080%==true (
+                if not exist "1080_hevc.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
+                if not exist "%folderName% - NCOP %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 1080p HEVC && %MuxNCOP_1080_x265% && @echo. && @echo.
+            )
 		)		
 	)
 	@echo.
@@ -214,18 +288,32 @@ if exist "Special %episodeNumber%" (
 		if not exist "audio.flac" @echo Encoding %folderName% - Special %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - Special %episodeNumber% 480p && %Enc_480% @echo.
-			if not exist "%folderName% - Special %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 480p && %MuxSpecial_480% && @echo. && @echo.
+			if %encode_x264_480%==true (
+                if not exist "480.mkv" @echo Encoding %folderName% - Special %episodeNumber% 480p && %x264_480% @echo.
+                if not exist "%folderName% - Special %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 480p && %MuxSpecial_480_x264% && @echo. && @echo.
+            )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
 			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - Special %episodeNumber% 720p && %Enc_720% && @echo.
-			if not exist "%folderName% - Special %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 720p && %MuxSpecial_720% && @echo. && @echo.
+			if %encode_x264_720%==true (
+                if not exist "720.mkv" @echo Encoding %folderName% - Special %episodeNumber% 720p && %x264_720% && @echo.
+                if not exist "%folderName% - Special %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 720p && %MuxSpecial_720_x264% && @echo. && @echo.
+            )
+			if %encode_x265_720%==true (
+                if not exist "720_hevc.mkv" @echo Encoding %folderName% - Special %episodeNumber% 720p HEVC && %x265_720% && @echo.
+                if not exist "%folderName% - Special %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 720p HEVC && %MuxSpecial_720_x265% && @echo. && @echo.
+            )
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - Special %episodeNumber% 1080p && %Enc_1080% && @echo.
-			if not exist "%folderName% - Special %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 1080p && %MuxSpecial_1080% && @echo. && @echo.
+			if %encode_x264_1080%==true (
+                if not exist "1080.mkv" @echo Encoding %folderName% - Special %episodeNumber% 1080p && %x264_1080% && @echo.
+                if not exist "%folderName% - Special %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 1080p && %MuxSpecial_1080_x264% && @echo. && @echo.
+            )
+			if %encode_x265_1080%==true (
+                if not exist "1080_hevc.mkv" @echo Encoding %folderName% - Special %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
+                if not exist "%folderName% - Special %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 1080p HEVC && %MuxSpecial_1080_x265% && @echo. && @echo.
+            )
 		)
 	)
 	@echo.
@@ -249,18 +337,32 @@ if exist "OVA %episodeNumber%" (
 		if not exist "audio.flac" @echo Encoding %folderName% - OVA %episodeNumber% FLAC && %audio_FLAC% && @echo.
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
-			if not exist "480.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 480p && %Enc_480% && @echo.
-			if not exist "%folderName% - OVA %episodeNumber% %Tags_480%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480% && @echo. && @echo.
+			if %encode_x264_480%==true (
+                if not exist "480.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 480p && %x264_480% && @echo.
+                if not exist "%folderName% - OVA %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480_x264% && @echo. && @echo.
+            )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
 			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 		)
 		if exist "720.avs" (
-			if not exist "720.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p && %Enc_720% && @echo.
-			if not exist "%folderName% - OVA %episodeNumber% %Tags_720%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 720p && %MuxOVA_720% && @echo. && @echo.
+			if %encode_x264_720%==true (
+                if not exist "720.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p && %x264_720% && @echo.
+                if not exist "%folderName% - OVA %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 720p && %MuxOVA_720_x264% && @echo. && @echo.
+            )
+			if %encode_x265_720%==true (
+                if not exist "720_hevc.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p HEVC && %x265_720% && @echo.
+                if not exist "%folderName% - OVA %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 720p HEVC && %MuxOVA_720_x265% && @echo. && @echo.
+            )
 		)
 		if exist "1080.avs" (
-			if not exist "1080.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 1080p && %Enc_1080% && @echo.
-			if not exist "%folderName% - OVA %episodeNumber% %Tags_1080%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 1080p && %MuxOVA_1080% && @echo. && @echo.
+			if %encode_x264_1080%==true (
+                if not exist "1080.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 1080p && %x264_1080% && @echo.
+                if not exist "%folderName% - OVA %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 1080p && %MuxOVA_1080_x264% && @echo. && @echo.
+            )
+			if %encode_x265_1080%==true (
+                if not exist "1080_hevc.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
+                if not exist "%folderName% - OVA %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 1080p HEVC && %MuxOVA_1080_x265% && @echo. && @echo.
+            )
 		)
 	)
 	@echo.
