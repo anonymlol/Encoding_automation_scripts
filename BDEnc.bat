@@ -138,6 +138,7 @@ if exist "Ep %episodeNumber%" (
 		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - %episodeNumber% FLAC && %audio_FLAC% && @echo.
+        if exist "audio - Log.txt" del "audio - Log.txt"
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
 			if %encode_x264_480%==true (
@@ -145,7 +146,8 @@ if exist "Ep %episodeNumber%" (
                 if not exist "%folderName% - %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - %episodeNumber% 480p && %MuxEp_480_x264% && @echo. && @echo.
             )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if exist "pass.avs" del pass.avs
 		)
 		if exist "720.avs" (
 			if %encode_x264_720%==true (
@@ -188,6 +190,7 @@ if exist "NCED %episodeNumber%" (
 		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - NCED %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCED %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - NCED %episodeNumber% FLAC && %audio_FLAC% && @echo.
+        if exist "audio - Log.txt" del "audio - Log.txt"
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
 			if %encode_x264_480%==true (
@@ -195,7 +198,8 @@ if exist "NCED %episodeNumber%" (
                 if not exist "%folderName% - NCED %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 480p && %MuxNCED_480_x264% && @echo. && @echo.
             )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if exist "pass.avs" del pass.avs
 		)
 		if exist "720.avs" (
 			if %encode_x264_720%==true (
@@ -237,6 +241,7 @@ if exist "NCOP %episodeNumber%" (
 		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - NCOP %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - NCOP %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - NCOP %episodeNumber% FLAC && %audio_FLAC% && @echo.
+        if exist "audio - Log.txt" del "audio - Log.txt"
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
 			if %encode_x264_480%==true (
@@ -244,7 +249,8 @@ if exist "NCOP %episodeNumber%" (
                 if not exist "%folderName% - NCOP %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 480p && %MuxNCOP_480_x264% && @echo. && @echo.
             )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if exist "pass.avs" del pass.avs
 		)
 		if exist "720.avs" (
 			if %encode_x264_720%==true (
@@ -286,6 +292,7 @@ if exist "Special %episodeNumber%" (
 		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - Special %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - Special %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - Special %episodeNumber% FLAC && %audio_FLAC% && @echo.
+        if exist "audio - Log.txt" del "audio - Log.txt"
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
 			if %encode_x264_480%==true (
@@ -293,7 +300,8 @@ if exist "Special %episodeNumber%" (
                 if not exist "%folderName% - Special %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 480p && %MuxSpecial_480_x264% && @echo. && @echo.
             )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if exist "pass.avs" del pass.avs
 		)
 		if exist "720.avs" (
 			if %encode_x264_720%==true (
@@ -335,6 +343,7 @@ if exist "OVA %episodeNumber%" (
 		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - OVA %episodeNumber% Subs && %subs_pgs% && @echo.)
 		if not exist "audio.mp4" @echo Encoding %folderName% - OVA %episodeNumber% AAC && %audio_AAC% && @echo.
 		if not exist "audio.flac" @echo Encoding %folderName% - OVA %episodeNumber% FLAC && %audio_FLAC% && @echo.
+        if exist "audio - Log.txt" del "audio - Log.txt"
 		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
 		if exist "480.avs" (
 			if %encode_x264_480%==true (
@@ -342,7 +351,8 @@ if exist "OVA %episodeNumber%" (
                 if not exist "%folderName% - OVA %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480_x264% && @echo. && @echo.
             )
 			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
+			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if exist "pass.avs" del pass.avs
 		)
 		if exist "720.avs" (
 			if %encode_x264_720%==true (
