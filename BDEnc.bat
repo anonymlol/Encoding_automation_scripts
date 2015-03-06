@@ -123,260 +123,260 @@ set MuxOVA_720_x265=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_720_x2
 set MuxOVA_1080_x265=mkvmerge -o "%folderName% - OVA %episodeNumber% %Tags_1080_x265%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_1080_x265%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "1080_hevc.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_1080%" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.%audio_1080%" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
 
 if exist "Ep %episodeNumber%" (
-	@echo -----------------------------------Episode %episodeNumber%-----------------------------------
-	@echo.
-	cd "Ep %episodeNumber%"
-	if exist *.m2ts (
-		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
-			if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
-		)
-		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
-		if not exist %indexFile% @echo Indexing %folderName% - %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
-		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - %episodeNumber% Subs && %subs_pgs% && @echo.)
-		if not exist "audio.mp4" @echo Encoding %folderName% - %episodeNumber% AAC && %audio_AAC% && @echo.
-		if not exist "audio.flac" @echo Encoding %folderName% - %episodeNumber% FLAC && %audio_FLAC% && @echo.
+    @echo -----------------------------------Episode %episodeNumber%-----------------------------------
+    @echo.
+    cd "Ep %episodeNumber%"
+    if exist *.m2ts (
+        if %copyScripts%==true (
+            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
+        )
+        if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
+        if not exist %indexFile% @echo Indexing %folderName% - %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+        if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - %episodeNumber% Subs && %subs_pgs% && @echo.)
+        if not exist "audio.mp4" @echo Encoding %folderName% - %episodeNumber% AAC && %audio_AAC% && @echo.
+        if not exist "audio.flac" @echo Encoding %folderName% - %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
-		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
-		if exist "480.avs" (
-			if %encode_x264_480%==true (
+        if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
+        if exist "480.avs" (
+            if %encode_x264_480%==true (
                 if not exist "480.mkv" @echo Encoding %folderName% - %episodeNumber% 480p && %x264_480% && @echo.
                 if not exist "%folderName% - %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - %episodeNumber% 480p && %MuxEp_480_x264% && @echo. && @echo.
             )
-			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
-		)
-		if exist "720.avs" (
-			if %encode_x264_720%==true (
+        )
+        if exist "720.avs" (
+            if %encode_x264_720%==true (
                 if not exist "720.mkv" @echo Encoding %folderName% - %episodeNumber% 720p && %x264_720% && @echo.
                 if not exist "%folderName% - %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - %episodeNumber% 720p && %MuxEp_720_x264% && @echo. && @echo.
             )
-			if %encode_x265_720%==true (
+            if %encode_x265_720%==true (
                 if not exist "720_hevc.mkv" @echo Encoding %folderName% - %episodeNumber% 720p HEVC && %x265_720% && @echo.
                 if not exist "%folderName% - %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - %episodeNumber% 720p HEVC && %MuxEp_720_x265% && @echo. && @echo.
             )
-		)
-		if exist "1080.avs" (
-			if %encode_x264_1080%==true (
+        )
+        if exist "1080.avs" (
+            if %encode_x264_1080%==true (
                 if not exist "1080.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p && %x264_1080% && @echo.
                 if not exist "%folderName% - %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - %episodeNumber% 1080p && %MuxEp_1080_x264% && @echo. && @echo.
             )
-			if %encode_x265_1080%==true (
+            if %encode_x265_1080%==true (
                 if not exist "1080_hevc.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
                 if not exist "%folderName% - %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - %episodeNumber% 1080p HEVC && %MuxEp_1080_x265% && @echo. && @echo.
             )
-		)
-	)
-	@echo.
-	cd..
+        )
+    )
+    @echo.
+    cd..
 )
 
 if exist "NCED %episodeNumber%" (
-	@echo -----------------------------------NCED %episodeNumber%-----------------------------------
-	@echo.
-	cd "NCED %episodeNumber%"
-	if exist *.m2ts (
-		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
-			if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
-		)
-		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
-		if not exist %indexFile% @echo Indexing %folderName% - NCED %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
-		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - NCED %episodeNumber% Subs && %subs_pgs% && @echo.)
-		if not exist "audio.mp4" @echo Encoding %folderName% - NCED %episodeNumber% AAC && %audio_AAC% && @echo.
-		if not exist "audio.flac" @echo Encoding %folderName% - NCED %episodeNumber% FLAC && %audio_FLAC% && @echo.
+    @echo -----------------------------------NCED %episodeNumber%-----------------------------------
+    @echo.
+    cd "NCED %episodeNumber%"
+    if exist *.m2ts (
+        if %copyScripts%==true (
+            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
+        )
+        if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
+        if not exist %indexFile% @echo Indexing %folderName% - NCED %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+        if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - NCED %episodeNumber% Subs && %subs_pgs% && @echo.)
+        if not exist "audio.mp4" @echo Encoding %folderName% - NCED %episodeNumber% AAC && %audio_AAC% && @echo.
+        if not exist "audio.flac" @echo Encoding %folderName% - NCED %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
-		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
-		if exist "480.avs" (
-			if %encode_x264_480%==true (
+        if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
+        if exist "480.avs" (
+            if %encode_x264_480%==true (
                 if not exist "480.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 480p && %x264_480% && @echo.
                 if not exist "%folderName% - NCED %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 480p && %MuxNCED_480_x264% && @echo. && @echo.
             )
-			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
-		)
-		if exist "720.avs" (
-			if %encode_x264_720%==true (
+        )
+        if exist "720.avs" (
+            if %encode_x264_720%==true (
                 if not exist "720.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 720p && %x264_720% && @echo.
                 if not exist "%folderName% - NCED %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 720p && %MuxNCED_720_x264% && @echo. && @echo.
             )
-			if %encode_x265_720%==true (
+            if %encode_x265_720%==true (
                 if not exist "720_hevc.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 720p HEVC && %x265_720% && @echo.
                 if not exist "%folderName% - NCED %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 720p HEVC && %MuxNCED_720_x265% && @echo. && @echo.
             )
-		)
-		if exist "1080.avs" (
-			if %encode_x264_1080%==true (
+        )
+        if exist "1080.avs" (
+            if %encode_x264_1080%==true (
                 if not exist "1080.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 1080p && %x264_1080% && @echo.
                 if not exist "%folderName% - NCED %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 1080p && %MuxNCED_1080_x264% && @echo. && @echo.
             )
-			if %encode_x265_1080%==true (
+            if %encode_x265_1080%==true (
                 if not exist "1080_hevc.mkv" @echo Encoding %folderName% - NCED %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
                 if not exist "%folderName% - NCED %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 1080p HEVC && %MuxNCED_1080_x265% && @echo. && @echo.
             )
-		)
-	)
-	@echo.
-	cd..
+        )
+    )
+    @echo.
+    cd..
 )
 if exist "NCOP %episodeNumber%" (
-	@echo -----------------------------------NCOP %episodeNumber%-----------------------------------
-	@echo.
-	cd "NCOP %episodeNumber%"
-	if exist *.m2ts (
-		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
-			if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
-		)
-		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
-		if not exist %indexFile% @echo Indexing %folderName% - NCOP %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
-		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - NCOP %episodeNumber% Subs && %subs_pgs% && @echo.)
-		if not exist "audio.mp4" @echo Encoding %folderName% - NCOP %episodeNumber% AAC && %audio_AAC% && @echo.
-		if not exist "audio.flac" @echo Encoding %folderName% - NCOP %episodeNumber% FLAC && %audio_FLAC% && @echo.
+    @echo -----------------------------------NCOP %episodeNumber%-----------------------------------
+    @echo.
+    cd "NCOP %episodeNumber%"
+    if exist *.m2ts (
+        if %copyScripts%==true (
+            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
+        )
+        if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
+        if not exist %indexFile% @echo Indexing %folderName% - NCOP %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+        if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - NCOP %episodeNumber% Subs && %subs_pgs% && @echo.)
+        if not exist "audio.mp4" @echo Encoding %folderName% - NCOP %episodeNumber% AAC && %audio_AAC% && @echo.
+        if not exist "audio.flac" @echo Encoding %folderName% - NCOP %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
-		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
-		if exist "480.avs" (
-			if %encode_x264_480%==true (
+        if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
+        if exist "480.avs" (
+            if %encode_x264_480%==true (
                 if not exist "480.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 480p && %x264_480% && @echo.
                 if not exist "%folderName% - NCOP %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 480p && %MuxNCOP_480_x264% && @echo. && @echo.
             )
-			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
-		)
-		if exist "720.avs" (
-			if %encode_x264_720%==true (
+        )
+        if exist "720.avs" (
+            if %encode_x264_720%==true (
                 if not exist "720.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 720p && %x264_720% && @echo.
                 if not exist "%folderName% - NCOP %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 720p && %MuxNCOP_720_x264% && @echo. && @echo.
             )
-			if %encode_x265_720%==true (
+            if %encode_x265_720%==true (
                 if not exist "720_hevc.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 720p HEVC && %x265_720% && @echo.
                 if not exist "%folderName% - NCOP %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 720p HEVC && %MuxNCOP_720_x265% && @echo. && @echo.
             )
-		)
-		if exist "1080.avs" (
-			if %encode_x264_1080%==true (
+        )
+        if exist "1080.avs" (
+            if %encode_x264_1080%==true (
                 if not exist "1080.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 1080p && %x264_1080% && @echo.
                 if not exist "%folderName% - NCOP %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 1080p && %MuxNCOP_1080_x264% && @echo. && @echo.
             )
-			if %encode_x265_1080%==true (
+            if %encode_x265_1080%==true (
                 if not exist "1080_hevc.mkv" @echo Encoding %folderName% - NCOP %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
                 if not exist "%folderName% - NCOP %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 1080p HEVC && %MuxNCOP_1080_x265% && @echo. && @echo.
             )
-		)		
-	)
-	@echo.
-	cd..
+        )       
+    )
+    @echo.
+    cd..
 )
 if exist "Special %episodeNumber%" (
-	@echo -----------------------------------Special %episodeNumber%-----------------------------------
-	@echo.
-	cd "Special %episodeNumber%"
-	if exist *.m2ts (
-		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
-			if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
-		)
-		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
-		if not exist %indexFile% @echo Indexing %folderName% - Special %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
-		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - Special %episodeNumber% Subs && %subs_pgs% && @echo.)
-		if not exist "audio.mp4" @echo Encoding %folderName% - Special %episodeNumber% AAC && %audio_AAC% && @echo.
-		if not exist "audio.flac" @echo Encoding %folderName% - Special %episodeNumber% FLAC && %audio_FLAC% && @echo.
+    @echo -----------------------------------Special %episodeNumber%-----------------------------------
+    @echo.
+    cd "Special %episodeNumber%"
+    if exist *.m2ts (
+        if %copyScripts%==true (
+            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
+        )
+        if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
+        if not exist %indexFile% @echo Indexing %folderName% - Special %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+        if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - Special %episodeNumber% Subs && %subs_pgs% && @echo.)
+        if not exist "audio.mp4" @echo Encoding %folderName% - Special %episodeNumber% AAC && %audio_AAC% && @echo.
+        if not exist "audio.flac" @echo Encoding %folderName% - Special %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
-		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
-		if exist "480.avs" (
-			if %encode_x264_480%==true (
+        if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
+        if exist "480.avs" (
+            if %encode_x264_480%==true (
                 if not exist "480.mkv" @echo Encoding %folderName% - Special %episodeNumber% 480p && %x264_480% @echo.
                 if not exist "%folderName% - Special %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 480p && %MuxSpecial_480_x264% && @echo. && @echo.
             )
-			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
-		)
-		if exist "720.avs" (
-			if %encode_x264_720%==true (
+        )
+        if exist "720.avs" (
+            if %encode_x264_720%==true (
                 if not exist "720.mkv" @echo Encoding %folderName% - Special %episodeNumber% 720p && %x264_720% && @echo.
                 if not exist "%folderName% - Special %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 720p && %MuxSpecial_720_x264% && @echo. && @echo.
             )
-			if %encode_x265_720%==true (
+            if %encode_x265_720%==true (
                 if not exist "720_hevc.mkv" @echo Encoding %folderName% - Special %episodeNumber% 720p HEVC && %x265_720% && @echo.
                 if not exist "%folderName% - Special %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 720p HEVC && %MuxSpecial_720_x265% && @echo. && @echo.
             )
-		)
-		if exist "1080.avs" (
-			if %encode_x264_1080%==true (
+        )
+        if exist "1080.avs" (
+            if %encode_x264_1080%==true (
                 if not exist "1080.mkv" @echo Encoding %folderName% - Special %episodeNumber% 1080p && %x264_1080% && @echo.
                 if not exist "%folderName% - Special %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 1080p && %MuxSpecial_1080_x264% && @echo. && @echo.
             )
-			if %encode_x265_1080%==true (
+            if %encode_x265_1080%==true (
                 if not exist "1080_hevc.mkv" @echo Encoding %folderName% - Special %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
                 if not exist "%folderName% - Special %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 1080p HEVC && %MuxSpecial_1080_x265% && @echo. && @echo.
             )
-		)
-	)
-	@echo.
-	cd..
+        )
+    )
+    @echo.
+    cd..
 )
 if exist "OVA %episodeNumber%" (
-	@echo -----------------------------------OVA %episodeNumber%-----------------------------------
-	@echo.
-	cd "OVA %episodeNumber%"
-	if exist *.m2ts (
-		if %copyScripts%==true (
-			if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-			if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-			if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
-			if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
-		)
-		if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
-		if not exist %indexFile% @echo Indexing %folderName% - OVA %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
-		if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - OVA %episodeNumber% Subs && %subs_pgs% && @echo.)
-		if not exist "audio.mp4" @echo Encoding %folderName% - OVA %episodeNumber% AAC && %audio_AAC% && @echo.
-		if not exist "audio.flac" @echo Encoding %folderName% - OVA %episodeNumber% FLAC && %audio_FLAC% && @echo.
+    @echo -----------------------------------OVA %episodeNumber%-----------------------------------
+    @echo.
+    cd "OVA %episodeNumber%"
+    if exist *.m2ts (
+        if %copyScripts%==true (
+            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
+        )
+        if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
+        if not exist %indexFile% @echo Indexing %folderName% - OVA %episodeNumber% && %Frameserver% && @echo Indexing done && @echo.
+        if %sub_demux%==true (if not exist "subs_1080.sup" @echo Extracting %folderName% - OVA %episodeNumber% Subs && %subs_pgs% && @echo.)
+        if not exist "audio.mp4" @echo Encoding %folderName% - OVA %episodeNumber% AAC && %audio_AAC% && @echo.
+        if not exist "audio.flac" @echo Encoding %folderName% - OVA %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
-		if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
-		if exist "480.avs" (
-			if %encode_x264_480%==true (
+        if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
+        if exist "480.avs" (
+            if %encode_x264_480%==true (
                 if not exist "480.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 480p && %x264_480% && @echo.
                 if not exist "%folderName% - OVA %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480_x264% && @echo. && @echo.
             )
-			if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-			if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
+            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
-		)
-		if exist "720.avs" (
-			if %encode_x264_720%==true (
+        )
+        if exist "720.avs" (
+            if %encode_x264_720%==true (
                 if not exist "720.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p && %x264_720% && @echo.
                 if not exist "%folderName% - OVA %episodeNumber% %Tags_720_x264%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 720p && %MuxOVA_720_x264% && @echo. && @echo.
             )
-			if %encode_x265_720%==true (
+            if %encode_x265_720%==true (
                 if not exist "720_hevc.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 720p HEVC && %x265_720% && @echo.
                 if not exist "%folderName% - OVA %episodeNumber% %Tags_720_x265%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 720p HEVC && %MuxOVA_720_x265% && @echo. && @echo.
             )
-		)
-		if exist "1080.avs" (
-			if %encode_x264_1080%==true (
+        )
+        if exist "1080.avs" (
+            if %encode_x264_1080%==true (
                 if not exist "1080.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 1080p && %x264_1080% && @echo.
                 if not exist "%folderName% - OVA %episodeNumber% %Tags_1080_x264%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 1080p && %MuxOVA_1080_x264% && @echo. && @echo.
             )
-			if %encode_x265_1080%==true (
+            if %encode_x265_1080%==true (
                 if not exist "1080_hevc.mkv" @echo Encoding %folderName% - OVA %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
                 if not exist "%folderName% - OVA %episodeNumber% %Tags_1080_x265%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 1080p HEVC && %MuxOVA_1080_x265% && @echo. && @echo.
             )
-		)
-	)
-	@echo.
-	cd..
+        )
+    )
+    @echo.
+    cd..
 )
 REM Number of folders to check
 if not %folderCount% == %Episodes% goto :loop
