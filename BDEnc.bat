@@ -1,7 +1,7 @@
 @echo off
 
 REM x264 settings
-set x264_480=avs4x26x -L "x264_64" --level 4.1 --colormatrix bt709 --preset veryslow --crf 15.0 --log-level none --output "480.mkv" "480.avs"
+set x264_480=avs4x26x -L "x264_64" --level 4.1 --colormatrix bt709 --preset veryslow --crf 16.0 --log-level none --output "480.mkv" "480.avs"
 set x264_720=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 16.0 --input-depth 16 --log-level none --output "720.mkv" "720.avs"
 set x264_1080=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 18.0 --input-depth 16 --log-level none --output "1080.mkv" "1080.avs"
 
