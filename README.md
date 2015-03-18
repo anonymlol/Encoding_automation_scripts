@@ -12,12 +12,12 @@ A specific folder structure is necessary. Use this [BD Template](https://db.tt/2
 
 For piping to 64-bit x264/x265, you need [avs4x26x](http://forum.doom9.org/showthread.php?t=162656).
 
-### Create BDEnc Dir ###
-Creates a directory for BDEnc.
+### Create BDEnc/TVEnc Dir ###
+These create directories for BDEnc or TVEnc.
 
 ### TVEnc ###
 Encodes, muxes, names and uploads TV encodes. 
 
 Needs [wput](http://wput.sourceforge.net/) for uploading and [vfr.py](https://github.com/wiiaboo/vfr/releases) for trimming the audio.
 
-Use the following folder structure: Showname/01/TVEnc.bat ([TV Template](https://db.tt/KL9PKl0t))
+Use the following folder structure: Showname/01/TVEnc.bat ([TV Template](https://db.tt/KL9PKl0t) or [Create TVEnc Dir.bat](https://github.com/anonymlol/Encoding_automation_scripts/blob/master/Create%20TVEnc%20Dir.bat))
