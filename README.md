@@ -8,7 +8,7 @@
 - creates pass files
 - Muxes (with correct names/numbers fetched from the folders, for example: "Showname - NCED 01 480 AAC.mkv")
 
-A specific folder structure is necessary. Use this [BD Template](https://db.tt/295TS1NH) or the new "[Create BDEnc Dir.bat](https://github.com/anonymlol/Encoding_automation_scripts/blob/master/Create%20BDEnc%20Dir.bat)" (highly recommended).
+A specific folder structure is necessary. Use this [BD Template](https://db.tt/295TS1NH) or the new [Create BDEnc Dir.bat](https://github.com/anonymlol/Encoding_automation_scripts/blob/master/Create%20BDEnc%20Dir.bat) (highly recommended).
 
 For piping to 64-bit x264/x265, you need [avs4x26x](http://forum.doom9.org/showthread.php?t=162656).
 
