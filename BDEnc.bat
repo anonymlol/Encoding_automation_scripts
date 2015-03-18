@@ -58,12 +58,9 @@ REM Indexing settings.
 set DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h
 set DGIndexNV=DGIndexNV -i "src.m2ts" -o "src.dgi" -h
 
-REM Set your frameserver here. Supported ones are listed above.
+REM Set your frameserver and index file here. DGIndexNV + src.dgi or DGAVCIndex + src.dga
 set Frameserver=%DGIndexNV%
-
-REM Leave this if the indexer is in your path. If it isn't, modify the string extraction to return the name of the indexer. Example: start position --> 0,10 <-- amount of letters.
-if %Frameserver:~0,10%==DGAVCIndex set indexFile="src.dga"
-if %Frameserver:~0,9%==DGIndexNV set indexFile="src.dgi"
+set indexFile="src.dgi"
 
 REM FilterPass to make a filtered, lossless encode and then just resize that. Make sure your ffms2 is up-to-date (10bit support)
 set FilterPass=false
