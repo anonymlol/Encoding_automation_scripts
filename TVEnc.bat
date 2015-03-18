@@ -45,30 +45,30 @@ set Upload_720=wput --limit-rate=500K --no-directories --binary "%Showname% - %f
 @echo.
 
 if not exist "audio.mka" (
-	if exist "%audioName%" (
-		@echo Trimming audio
-		%Trim_audio%
-		@echo.
-	)
-	if not exist "audio.mka" (
-		if exist "%mkvSource%" (
-			@echo Demuxing audio from %mkvSource%
-			mkvmerge -o "audio.mka"  "--quiet" "--language" "1:jpn" "--forced-track" "1:yes" "-a" "1" "--no-attachments" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "%mkvSource%" ")" "--track-order" "0:1"
-			@echo.
-		)
-	)
+    if exist "%audioName%" (
+        @echo Trimming audio
+        %Trim_audio%
+        @echo.
+    )
+    if not exist "audio.mka" (
+        if exist "%mkvSource%" (
+            @echo Demuxing audio from %mkvSource%
+            mkvmerge -o "audio.mka"  "--quiet" "--language" "1:jpn" "--forced-track" "1:yes" "-a" "1" "--no-attachments" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "%mkvSource%" ")" "--track-order" "0:1"
+            @echo.
+        )
+    )
 )
 
 if not exist "480.mkv" (
-	@echo ------------------%Showname% - %folderNumber% %Tags_480%------------------
-	%Enc_480%
-	@echo.
-	@echo Muxing %Showname% - %folderNumber% %Tags_480%
-	%MuxTV_480%
-	@echo.
-	%Upload_480%
-	@echo.
-	@echo.
+    @echo ------------------%Showname% - %folderNumber% %Tags_480%------------------
+    %Enc_480%
+    @echo.
+    @echo Muxing %Showname% - %folderNumber% %Tags_480%
+    %MuxTV_480%
+    @echo.
+    %Upload_480%
+    @echo.
+    @echo.
 )
 
 if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
@@ -76,15 +76,15 @@ if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %pa
 
 
 if not exist "720.mkv" (
-	@echo ------------------%Showname% - %folderNumber% %Tags_720%------------------
-	%Enc_720% 
-	@echo.
-	@echo Muxing %Showname% - %folderNumber% %Tags_720%
-	%MuxTV_720%
-	@echo.
-	%Upload_720%
-	@echo.
-	@echo.
+    @echo ------------------%Showname% - %folderNumber% %Tags_720%------------------
+    %Enc_720% 
+    @echo.
+    @echo Muxing %Showname% - %folderNumber% %Tags_720%
+    %MuxTV_720%
+    @echo.
+    %Upload_720%
+    @echo.
+    @echo.
 )
 
 if not exist "%Showname% - %folderNumber% %Tags_480%.mkv" @echo Muxing %Showname% - %folderNumber% %Tags_480% && %MuxTV_480%
