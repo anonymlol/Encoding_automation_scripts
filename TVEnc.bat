@@ -11,8 +11,8 @@ set FTP_Host=
 set FTP_Path=
 
 REM x264 settings
-set Enc_480=x264 --level 4.1 --preset veryslow --colormatrix bt709 --crf 18.0 --log-level none --output "480.mkv" "480.avs"
-set Enc_720=x264-10bit --level 5.1 --preset veryslow --crf 18.0 --log-level none --output "720.mkv" "720.avs"
+set Enc_480=avs4x26x -L "x264_64" --level 4.1 --preset veryslow --colormatrix bt709 --crf 18.0 --log-level none --output "480.mkv" "480.avs"
+set Enc_720=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 18.0 --input-depth 16 --log-level none --output "720.mkv" "720.avs"
 
 REM vfr.py settings
 set Trim_audio=vfr.py -i "%audioName%" -o "audio.mka" -f 24/1.001 -m "480.avs"
