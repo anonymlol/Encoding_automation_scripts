@@ -125,9 +125,11 @@ if exist "Ep %episodeNumber%" (
     cd "Ep %episodeNumber%"
     if exist *.m2ts (
         if %copyScripts%==true (
-            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x264_480%==true if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if %encode_x264_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x265_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x264_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x265_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
             if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
         )
         if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
@@ -177,9 +179,11 @@ if exist "NCED %episodeNumber%" (
     cd "NCED %episodeNumber%"
     if exist *.m2ts (
         if %copyScripts%==true (
-            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x264_480%==true if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if %encode_x264_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x265_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x264_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x265_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
             if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
         )
         if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
@@ -228,9 +232,11 @@ if exist "NCOP %episodeNumber%" (
     cd "NCOP %episodeNumber%"
     if exist *.m2ts (
         if %copyScripts%==true (
-            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x264_480%==true if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if %encode_x264_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x265_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x264_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x265_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
             if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
         )
         if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
@@ -279,9 +285,11 @@ if exist "Special %episodeNumber%" (
     cd "Special %episodeNumber%"
     if exist *.m2ts (
         if %copyScripts%==true (
-            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x264_480%==true if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if %encode_x264_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x265_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x264_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x265_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
             if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
         )
         if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
@@ -330,9 +338,11 @@ if exist "OVA %episodeNumber%" (
     cd "OVA %episodeNumber%"
     if exist *.m2ts (
         if %copyScripts%==true (
-            if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
-            if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
-            if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x264_480%==true if not exist "480.avs" xcopy "%~dp0%avsFolder%\480.avs" && @echo.
+            if %encode_x264_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x265_720%==true if not exist "720.avs" xcopy "%~dp0%avsFolder%\720.avs" && @echo.
+            if %encode_x264_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
+            if %encode_x265_1080%==true if not exist "1080.avs" xcopy "%~dp0%avsFolder%\1080.avs" && @echo.
             if %FilterPass%==true if not exist "lossless.avs" xcopy "%~dp0%avsFolder%\lossless.avs" && @echo.
         )
         if %renameSource%==true (if not *.m2ts==src.m2ts rename *.m2ts %sourceName%.m2ts)
