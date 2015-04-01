@@ -50,9 +50,9 @@ set audio_track_name_480=AAC
 set audio_track_name_720=AAC
 set audio_track_name_1080=FLAC
 
-REM Create pass files? Change to "true" to enable it. You can find xvid_encraw.exe in your megui folder
+REM Create pass files (Keyframes). Change to "true" to enable it. You can find xvid_encraw.exe in your megui folder
 set passfile=false
-set passfile_settings=xvid_encraw -i pass.avs -type 2 -pass1 passfile.pass -full1pass -progress 21
+set passfile_settings=xvid_encraw -i pass.avs -type 2 -pass1 Keyframes.txt -full1pass -progress 21
 
 REM Indexing settings.
 set DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h
@@ -145,7 +145,7 @@ if exist "Ep %episodeNumber%" (
                 if not exist "%folderName% - %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - %episodeNumber% 480p && %MuxEp_480_x264% && @echo. && @echo.
             )
             if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "Keyframes.txt" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
         )
         if exist "720.avs" (
@@ -199,7 +199,7 @@ if exist "NCED %episodeNumber%" (
                 if not exist "%folderName% - NCED %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - NCED %episodeNumber% 480p && %MuxNCED_480_x264% && @echo. && @echo.
             )
             if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "Keyframes.txt" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
         )
         if exist "720.avs" (
@@ -252,7 +252,7 @@ if exist "NCOP %episodeNumber%" (
                 if not exist "%folderName% - NCOP %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - NCOP %episodeNumber% 480p && %MuxNCOP_480_x264% && @echo. && @echo.
             )
             if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "Keyframes.txt" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
         )
         if exist "720.avs" (
@@ -305,7 +305,7 @@ if exist "Special %episodeNumber%" (
                 if not exist "%folderName% - Special %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - Special %episodeNumber% 480p && %MuxSpecial_480_x264% && @echo. && @echo.
             )
             if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "Keyframes.txt" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
         )
         if exist "720.avs" (
@@ -358,7 +358,7 @@ if exist "OVA %episodeNumber%" (
                 if not exist "%folderName% - OVA %episodeNumber% %Tags_480_x264%.mkv" @echo Muxing %folderName% - OVA %episodeNumber% 480p && %MuxOVA_480_x264% && @echo. && @echo.
             )
             if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-            if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
+            if %passfile%==true if not exist "Keyframes.txt" @echo Creating Pass File && %passfile_settings% && @echo Done && @echo.
             if %passfile%==true if exist "pass.avs" del pass.avs
         )
         if exist "720.avs" (

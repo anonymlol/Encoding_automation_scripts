@@ -30,7 +30,7 @@ set audio_track_name_720=AAC
 
 REM Create pass files? Change to "true" to enable it. You can find xvid_encraw.exe in your megui folder
 set passfile=false
-set passfile_settings=xvid_encraw -i pass.avs -type 2 -pass1 passfile.pass -full1pass -progress 21
+set passfile_settings=xvid_encraw -i pass.avs -type 2 -pass1 Keyframes.txt -full1pass -progress 21
 
 REM Muxing settings
 set MuxTV_480=mkvmerge -o "%Showname% - %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mka" ")" "--track-order" "0:0,1:0" --disable-track-statistics-tags
@@ -72,7 +72,7 @@ if not exist "480.mkv" (
 )
 
 if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-if %passfile%==true if not exist "passfile.pass" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
+if %passfile%==true if not exist "Keyframes.txt" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
 
 
 if not exist "720.mkv" (
