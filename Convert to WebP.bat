@@ -1,5 +1,5 @@
 @echo off
-REM A short script to convert images to lossless WebP.
+REM A short script to convert images to lossless WebP. Download the WebP tools here: https://developers.google.com/speed/webp/download
 REM To auto-delete the original files after the conversion, uncomment the 2 lines below (line 7 and 9).
 
 :loop
