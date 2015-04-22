@@ -5,7 +5,7 @@ REM To auto-delete the original files after the conversion, uncomment the 2 line
 :loop
 echo Saving file "%~n1.webp"
 REM set input="%1"
-cwebp -quiet -lossless -q 100 -m 6 -f 0 -metadata icc "%~1" -o "%~n1.webp"
+cwebp -quiet -lossless -q 100 -m 6 -metadata icc "%~1" -o "%~n1.webp"
 REM del "%input%"
 shift
 if not "%~1"=="" goto :loop
