@@ -2,7 +2,7 @@
 
 REM Copy fonts to the subtitle file's folder
 REM The chapters file needs "chapter" somewhere in the name, or it won't be auto-detected (also, don't have more than one in the same folder, dunno what will happen otherwise >_>)
-REM Right-click the final subfile, send-to: Mux // Or drag & drop subfile onto the .bat file
+REM Right-click the final subfile, send-to: Release Muxer // Or drag & drop subfile onto the .bat file
 
 cd %~p1
 for %%A in ("%CD%") do set "folderName=%%~nxA"
