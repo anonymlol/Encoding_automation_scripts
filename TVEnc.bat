@@ -28,9 +28,8 @@ set video_track_name_720=AVC
 set audio_track_name_480=AAC
 set audio_track_name_720=AAC
 
-REM Create pass files? Change to "true" to enable it. You can find xvid_encraw.exe in your megui folder
-set passfile=false
-set passfile_settings=xvid_encraw -i pass.avs -type 2 -pass1 Keyframes.txt -full1pass -progress 21
+REM Create keyframes files (formerly known as "pass files"). Change to "true" to enable it. Requires SCXvid-standalone and FFmpeg.
+set keyframes=false
 
 REM Muxing settings
 set MuxTV_480=mkvmerge -o "%Showname% - %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mka" ")" "--track-order" "0:0,1:0"
@@ -71,8 +70,8 @@ if not exist "480.mkv" (
     @echo.
 )
 
-if %passfile%==true if not exist "pass.avs" @echo DirectShowSource^("480.mkv"^)> pass.avs && @echo.
-if %passfile%==true if not exist "Keyframes.txt" @echo Creating Pass File && %passfile_settings% && @echo Done && del pass.avs && @echo.
+if %keyframes%==true if not exist "%Showname% - %folderNumber% Keyframes.txt" if exist "480.mkv" @echo Creating Keyframes && ffmpeg -i "480.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | SCXvid.exe "%Showname% - %folderNumber% Keyframes.txt" && @echo Done && @echo.
+
 
 
 if not exist "720.mkv" (
@@ -86,6 +85,9 @@ if not exist "720.mkv" (
     @echo.
     @echo.
 )
+
+if %keyframes%==true if not exist "%Showname% - %folderNumber% Keyframes.txt" if exist "720.mkv" @echo Creating Keyframes && ffmpeg -i "720.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | SCXvid.exe "%Showname% - %folderNumber% Keyframes.txt" && @echo Done && @echo.
+
 
 if not exist "%Showname% - %folderNumber% %Tags_480%.mkv" @echo Muxing %Showname% - %folderNumber% %Tags_480% && %MuxTV_480%
 if not exist "%Showname% - %folderNumber% %Tags_720%.mkv" @echo Muxing %Showname% - %folderNumber% %Tags_720% && %MuxTV_720%
