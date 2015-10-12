@@ -73,7 +73,6 @@ if not exist "480.mkv" (
 if %keyframes%==true if not exist "%Showname% - %folderNumber% Keyframes.txt" if exist "480.mkv" @echo Creating Keyframes && ffmpeg -i "480.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | SCXvid.exe "%Showname% - %folderNumber% Keyframes.txt" && @echo Done && @echo.
 
 
-
 if not exist "720.mkv" (
     @echo ------------------%Showname% - %folderNumber% %Tags_720%------------------
     %Enc_720% 
