@@ -17,7 +17,8 @@ if %target_tracker%==2 mktorrent -a "http://anidex.moe:6969/announce" -l 19 "%~1
 if %target_tracker%==3 mktorrent -a "http://open.nyaatorrents.info:6544/announce" -l 19 "%~1"
 if %target_tracker%==4 mktorrent -a "http://tracker.bakabt.me:2710/announce.php" -l 19 -p "%~1"
 
+echo.
 shift
 if not "%~1"=="" goto :loop
 
-REM pause
+pause
