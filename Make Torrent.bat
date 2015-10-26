@@ -21,4 +21,4 @@ echo.
 shift
 if not "%~1"=="" goto :loop
 
-pause
+REM pause
