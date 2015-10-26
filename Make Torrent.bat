@@ -2,6 +2,7 @@
 
 REM Either drag & drop the folder(s)/file(s) onto the bat or put this into your "send to" folder (Win+R, type "shell:sendto")
 REM Don't forget to add mktorrent to your path or to adjust its path below.
+REM To see the mktorrent options, use "mktorrent -h"
 
 echo 1) AniDex + Minglong
 echo 2) AniDex
