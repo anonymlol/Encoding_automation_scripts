@@ -6,8 +6,8 @@ set x264_720=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 16.
 set x264_1080=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 18.0 --input-depth 16 --log-level none --output "1080.mkv" "1080.avs"
 
 REM x265 settings
-set x265_720=avs4x26x -L "x265" --preset slower --crf 16.0 --input-depth 16 --recon-depth 10 --output "720_hevc.mkv" "720.avs"
-set x265_1080=avs4x26x -L "x265" --preset slower --crf 16.0 --input-depth 16 --recon-depth 10 --output "1080_hevc.mkv" "1080.avs"
+set x265_720=avs4x26x -L "x265" --preset veryslow --limit-modes --limit-refs 3 --crf 16.0 --input-depth 16 --recon-depth 10 --output "720_hevc.mkv" "720.avs"
+set x265_1080=avs4x26x -L "x265" --preset veryslow --limit-modes --limit-refs 3 --crf 16.0 --input-depth 16 --recon-depth 10 --output "1080_hevc.mkv" "1080.avs"
 
 REM Enable/Disable encodes
 set encode_x264_480=true
