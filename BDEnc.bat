@@ -52,8 +52,8 @@ set audio_track_name_1080=FLAC
 
 REM Create keyframes files (formerly known as "pass files"). Change to "true" to enable it. Requires SCXvid-standalone and FFmpeg.
 set keyframes=false
-set ffmpeg_path=ffmpeg
-set SCXvid_path=SCXvid
+set ffmpeg_path="ffmpeg"
+set SCXvid_path="SCXvid"
 
 REM Indexing settings.
 set DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h

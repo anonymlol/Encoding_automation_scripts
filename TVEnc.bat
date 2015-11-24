@@ -30,8 +30,8 @@ set audio_track_name_720=AAC
 
 REM Create keyframes files (formerly known as "pass files"). Change to "true" to enable it. Requires SCXvid-standalone and FFmpeg.
 set keyframes=false
-set ffmpeg_path=ffmpeg
-set SCXvid_path=SCXvid
+set ffmpeg_path="ffmpeg"
+set SCXvid_path="SCXvid"
 
 REM Muxing settings
 set MuxTV_480=mkvmerge -o "%Showname% - %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mka" ")" "--track-order" "0:0,1:0"
