@@ -30,6 +30,8 @@ set audio_track_name_720=AAC
 
 REM Create keyframes files (formerly known as "pass files"). Change to "true" to enable it. Requires SCXvid-standalone and FFmpeg.
 set keyframes=false
+set ffmpeg_path=ffmpeg
+set SCXvid_path=SCXvid
 
 REM Muxing settings
 set MuxTV_480=mkvmerge -o "%Showname% - %folderNumber% %Tags_480%.mkv"  "--quiet" "--language" "0:jpn" "--track-name" "0:%video_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-d" "0" "-A" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "480.mkv" ")" "--language" "0:jpn" "--track-name" "0:%audio_track_name_480%" "--default-track" "0:yes" "--forced-track" "0:no" "-a" "0" "-D" "-S" "-T" "--no-global-tags" "--no-chapters" "(" "audio.mka" ")" "--track-order" "0:0,1:0"
@@ -70,7 +72,7 @@ if not exist "480.mkv" (
     @echo.
 )
 
-if %keyframes%==true if not exist "%Showname% - %folderNumber% Keyframes.txt" if exist "480.mkv" @echo Creating Keyframes && ffmpeg -i "480.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | SCXvid.exe "%Showname% - %folderNumber% Keyframes.txt" && @echo Done && @echo.
+if %keyframes%==true if not exist "%Showname% - %folderNumber% Keyframes.txt" if exist "480.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "480.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%Showname% - %folderNumber% Keyframes.txt" && @echo Done && @echo.
 
 
 if not exist "720.mkv" (
@@ -85,7 +87,7 @@ if not exist "720.mkv" (
     @echo.
 )
 
-if %keyframes%==true if not exist "%Showname% - %folderNumber% Keyframes.txt" if exist "720.mkv" @echo Creating Keyframes && ffmpeg -i "720.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | SCXvid.exe "%Showname% - %folderNumber% Keyframes.txt" && @echo Done && @echo.
+if %keyframes%==true if not exist "%Showname% - %folderNumber% Keyframes.txt" if exist "720.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "720.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%Showname% - %folderNumber% Keyframes.txt" && @echo Done && @echo.
 
 
 if not exist "%Showname% - %folderNumber% %Tags_480%.mkv" @echo Muxing %Showname% - %folderNumber% %Tags_480% && %MuxTV_480%
