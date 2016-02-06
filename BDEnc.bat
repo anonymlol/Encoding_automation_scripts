@@ -58,10 +58,15 @@ set SCXvid_path="SCXvid"
 REM Indexing settings.
 set DGAVCIndex=DGAVCIndex -i "src.m2ts" -o "src.dga" -h
 set DGIndexNV=DGIndexNV -i "src.m2ts" -o "src.dgi" -h
+set DGIndexIM=DGIndexIM -i "src.m2ts" -o "src.dgi" -h
 
-REM Set your frameserver and index file here. DGIndexNV + src.dgi or DGAVCIndex + src.dga
+REM Choose your frameserver.
 set Frameserver=%DGIndexNV%
-set indexFile="src.dgi"
+
+REM Index file name. No need to change anything here.
+if "%Frameserver%"=="%DGAVCIndex%" set indexFile="src.dga"
+if "%Frameserver%"=="%DGIndexNV%" set indexFile="src.dgi"
+if "%Frameserver%"=="%DGIndexIM%" set indexFile="src.dgi"
 
 REM FilterPass to make a filtered, lossless encode and then just resize that. Make sure your ffms2 is up-to-date (10bit support)
 set FilterPass=false
