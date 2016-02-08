@@ -21,6 +21,10 @@ REM eac3to settings
 set audio_AAC=eac3to src.m2ts 2: audio.mp4 -quality=0.6
 set audio_FLAC=eac3to src.m2ts 2: audio.flac -down16
 
+REM Settings for release folders
+set group=Doki
+set create_release_folders=true
+
 REM eac3to pgs (.sup) demux settings, switch to "true" and adjust the track number (:5) accordingly if you want to enable it.
 set sub_demux=false
 set subs_pgs=eac3to src.m2ts 5: subs_1080.sup
@@ -83,14 +87,14 @@ REM Copy/paste avs scripts from the first folder to the others (only if they don
 set copyScripts=true
 set avsFolder=Ep 01
 
-set group=Doki
 for %%A in ("%CD%") do set "folderName=%%~nxA"
 
-if %encode_x264_480%==true if not exist "%folderName% (*) [%group%][%Tags_480_x264%]" md "%folderName% () [%group%][%Tags_480_x264%]"
-if %encode_x264_720%==true if not exist "%folderName% (*) [%group%][%Tags_720_x264%]" md "%folderName% () [%group%][%Tags_720_x264%]"
-if %encode_x264_1080%==true if not exist "%folderName% (*) [%group%][%Tags_1080_x264%]" md "%folderName% () [%group%][%Tags_1080_x264%]"
-if %encode_x265_720%==true if not exist "%folderName% (*) [%group%][%Tags_720_x265%]" md "%folderName% () [%group%][%Tags_720_x265%]"
-if %encode_x265_1080%==true if not exist "%folderName% (*) [%group%][%Tags_1080_x265%]" md "%folderName% () [%group%][%Tags_1080_x265%]"
+if %encode_x264_480%==true if not exist "%folderName% (*) [%group%][%Tags_480_x264%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_480_x264%]"
+if %encode_x264_720%==true if not exist "%folderName% (*) [%group%][%Tags_720_x264%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_720_x264%]"
+if %encode_x264_1080%==true if not exist "%folderName% (*) [%group%][%Tags_1080_x264%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_1080_x264%]"
+if %encode_x265_720%==true if not exist "%folderName% (*) [%group%][%Tags_720_x265%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_720_x265%]"
+if %encode_x265_1080%==true if not exist "%folderName% (*) [%group%][%Tags_1080_x265%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_1080_x265%]"
+
 @echo.
 @echo Show: %folderName%
 @echo.
