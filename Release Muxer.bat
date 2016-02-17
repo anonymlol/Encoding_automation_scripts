@@ -21,23 +21,23 @@ for %%A in ("*.otf") do call set "fonts=%%fonts%% "--attachment-mime-type" "appl
 for %%A in ("*.ttf") do call set "fonts=%%fonts%% "--attachment-mime-type" "application/x-truetype-font" "--attachment-name" "%%~nxA" "--attach-file" "%%~nxA""
 for %%A in ("*.ttc") do call set "fonts=%%fonts%% "--attachment-mime-type" "application/x-truetype-font" "--attachment-name" "%%~nxA" "--attach-file" "%%~nxA""
 
-for %%A in ("%Showname% - *848x480*h264*.mkv") do set "enc_480_h264=%%~nxA"
-for %%A in ("%Showname% - *1280x720*Hi10P*.mkv") do set "enc_720_hi10=%%~nxA"
-for %%A in ("%Showname% - *1920x1080 Hi10P*.mkv") do set "enc_1080_hi10=%%~nxA"
+for %%A in ("%Showname% - *x480*h264*.mkv") do set "enc_480_h264=%%~nxA"
+for %%A in ("%Showname% - *x720*Hi10P*.mkv") do set "enc_720_hi10=%%~nxA"
+for %%A in ("%Showname% - *x1080 Hi10P*.mkv") do set "enc_1080_hi10=%%~nxA"
 
-for %%A in ("%Showname% - *1280x720*HEVC*.mkv") do set "enc_720_hevc=%%~nxA"
-for %%A in ("%Showname% - *1920x1080*HEVC*.mkv") do set "enc_1080_hevc=%%~nxA"
+for %%A in ("%Showname% - *x720*HEVC*.mkv") do set "enc_720_hevc=%%~nxA"
+for %%A in ("%Showname% - *x1080*HEVC*.mkv") do set "enc_1080_hevc=%%~nxA"
 
 for %%A in ("*chapter*") do call set "chapters_file=%%chapters_file%% "--chapters" "%%~nxA%""
 
 REM Mux settings x264
-set MuxEp_480_x264=mkvmerge -o "%group% %enc_480_h264%"  "--quiet" "--display-dimensions" "0:848x480" "(" "%enc_480_h264%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_480_h264%"%chapters_file%%fonts%
-set MuxEp_720_x264=mkvmerge -o "%group% %enc_720_hi10%"  "--quiet" "--display-dimensions" "0:1280x720" "(" "%enc_720_hi10%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_720_hi10%"%chapters_file%%fonts%
-set MuxEp_1080_x264=mkvmerge -o "%group% %enc_1080_hi10%"  "--quiet" "--display-dimensions" "0:1920x1080" "(" "%enc_1080_hi10%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_1080_hi10%"%chapters_file%%fonts%
+set MuxEp_480_x264=mkvmerge -o "%group% %enc_480_h264%"  "--quiet" "(" "%enc_480_h264%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_480_h264%"%chapters_file%%fonts%
+set MuxEp_720_x264=mkvmerge -o "%group% %enc_720_hi10%"  "--quiet" "(" "%enc_720_hi10%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_720_hi10%"%chapters_file%%fonts%
+set MuxEp_1080_x264=mkvmerge -o "%group% %enc_1080_hi10%"  "--quiet" "(" "%enc_1080_hi10%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_1080_hi10%"%chapters_file%%fonts%
 
 REM Mux settings x265
-set MuxEp_720_x265=mkvmerge -o "%group% %enc_720_hevc%"  "--quiet" "--display-dimensions" "0:1280x720" "(" "%enc_720_hevc%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_720_hevc%"%chapters_file%%fonts%
-set MuxEp_1080_x265=mkvmerge -o "%group% %enc_1080_hevc%"  "--quiet" "--display-dimensions" "0:1920x1080" "(" "%enc_1080_hevc%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_1080_hevc%"%chapters_file%%fonts%
+set MuxEp_720_x265=mkvmerge -o "%group% %enc_720_hevc%"  "--quiet" "(" "%enc_720_hevc%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_720_hevc%"%chapters_file%%fonts%
+set MuxEp_1080_x265=mkvmerge -o "%group% %enc_1080_hevc%"  "--quiet" "(" "%enc_1080_hevc%" ")" "--language" "0:eng" "--track-name" "0:%subtitle_trackname%" "--forced-track" "0:no" "-s" "0" "-D" "-A" "-T" "--no-global-tags" "--no-chapters" "(" "%~nx1" ")" "--track-order" "0:0,0:1,1:0" "--title" "%group% %enc_1080_hevc%"%chapters_file%%fonts%
 
 if exist "%enc_480_h264%" if not exist "%group% %enc_480_h264%" @echo Muxing "%group% %enc_480_h264%" && %MuxEp_480_x264% 
 if exist "%enc_720_hi10%" if not exist "%group% %enc_720_hi10%" @echo Muxing "%group% %enc_720_hi10%" && %MuxEp_720_x264% 
