@@ -8,6 +8,7 @@ echo 1) AniDex + Minglong
 echo 2) AniDex
 echo 3) Nyaa
 echo 4) BakaBT
+
 echo.
 set /p target_tracker=Choose Tracker: 
 echo.
