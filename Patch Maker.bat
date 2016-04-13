@@ -4,6 +4,7 @@ REM Usage: Select both files, but right-click/send-to (or drag & drop) only the 
 
 cd "%~dp1"
 if not exist "Patches" md "Patches"
+if not exist ".\Patches\xdelta3.exe" copy "xdelta3.exe" ".\Patches"
 
 echo Creating Patch...
 
