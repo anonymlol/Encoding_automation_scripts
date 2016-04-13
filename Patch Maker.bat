@@ -1,7 +1,6 @@
 @echo off
 
-REM Usage: Select both files, but right-click (or drag & drop) only the source (unpatched) file!
-REM Will probably add script creation (patch all) for linux/mac later
+REM Usage: Select both files, but right-click/send-to (or drag & drop) only the source (unpatched) file!
 
 cd "%~dp1"
 if not exist "Patches" md "Patches"
