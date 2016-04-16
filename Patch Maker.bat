@@ -1,7 +1,8 @@
 @echo off
 REM Usage: Select both files, but right-click/send-to (or drag & drop) only the source (unpatched) file!
+REM Requires dos2unix (to convert linux and mac script to unix format), download here: https://sourceforge.net/projects/dos2unix/
 
-REM set path to xdelta3.exe
+REM set paths
 set dos2unix_binary=C:\YOURPATH\dos2unix.exe
 set xdelta_binary=C:\YOURPATH\xdelta3.exe
 
