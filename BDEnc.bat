@@ -463,6 +463,7 @@ if exist "BD Menu %episodeNumber%" (
                 if not exist "%folderName% - BD Menu %episodeNumber% (%Tags_480_x264%).mkv" @echo Muxing %folderName% - BD Menu %episodeNumber% 480p && %MuxBD_Menu_480_x264% && @echo. && @echo.
             )
         )
+        if exist "720.avs" (
             if %encode_x264_720%==true (
                 if not exist "720.mkv" @echo Encoding %folderName% - BD Menu %episodeNumber% 720p && %x264_720% && @echo.
                 if not exist "%folderName% - BD Menu %episodeNumber% (%Tags_720_x264%).mkv" @echo Muxing %folderName% - BD Menu %episodeNumber% 720p && %MuxBD_Menu_720_x264% && @echo. && @echo.
