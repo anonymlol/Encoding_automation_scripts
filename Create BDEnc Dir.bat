@@ -37,6 +37,14 @@ set /p OVACount="Enter Number of OVAs: "
     goto :RetryOVACount
 )
 
+:RetryBDMenuCount
+set /p BDMenuCount="Enter Number of BD Menus: "
+@echo %BDMenuCount%|findstr /xr "[1-9][0-9]* 0" >nul && (
+    @echo. ) || (
+    @echo Not a valid number!
+    goto :RetryBDMenuCount
+)
+
 if not exist "%FolderName%" md "%FolderName%"
 cd "%FolderName%"
 
@@ -81,6 +89,16 @@ if %OVA_Counter% LSS 10 set OVA_Number=0%OVA_Counter%
 if %OVA_Counter% GEQ 10 set OVA_Number=%OVA_Counter%
 if not exist "OVA %OVA_Number%" md "OVA %OVA_Number%"
 if not %OVA_Counter% == %OVACount% goto :OVALoop
+
+:BDMenu_Step
+if %BDMenuCount%==0 goto :Last_Step
+set BDMenu_Counter=0
+:BDMenuLoop
+set /a BDMenu_Counter=BDMenu_Counter+1
+if %BDMenu_Counter% LSS 10 set BDMenu_Number=0%BDMenu_Counter%
+if %BDMenu_Counter% GEQ 10 set BDMenu_Number=%BDMenu_Counter%
+if not exist "BD Menu %BDMenu_Number%" md "BD Menu %BDMenu_Number%"
+if not %BDMenu_Counter% == %BDMenuCount% goto :BDMenuLoop
 
 :Last_Step
 if not exist "Ep 01" goto :end
