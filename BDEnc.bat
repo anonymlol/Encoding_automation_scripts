@@ -2,12 +2,12 @@
 
 REM x264 settings
 set x264_480=avs4x26x -L "x264_64" --level 4.1 --colormatrix bt709 --preset veryslow --crf 16.0 --log-level none --output "480.mkv" "480.avs"
-set x264_720=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 16.0 --input-depth 16 --log-level none --output "720.mkv" "720.avs"
-set x264_1080=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 18.0 --input-depth 16 --log-level none --output "1080.mkv" "1080.avs"
+set x264_720=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 16.0 --input-depth 10 --log-level none --output "720.mkv" "720.avs"
+set x264_1080=avs4x26x -L "x264_64-10bit" --level 5.1 --preset veryslow --crf 18.0 --input-depth 10 --log-level none --output "1080.mkv" "1080.avs"
 
 REM x265 settings
-set x265_720=avs4x26x -L "x265" --preset veryslow --limit-refs 3 --crf 16.0 --input-depth 16 --recon-depth 10 --output "720_hevc.mkv" "720.avs"
-set x265_1080=avs4x26x -L "x265" --preset veryslow --limit-refs 3 --crf 16.0 --input-depth 16 --recon-depth 10 --output "1080_hevc.mkv" "1080.avs"
+set x265_720=avs4x26x -L "x265" --preset veryslow --limit-refs 3 --crf 16.0 --input-depth 10 --recon-depth 10 --output "720_hevc.mkv" "720.avs"
+set x265_1080=avs4x26x -L "x265" --preset veryslow --limit-refs 3 --crf 16.0 --input-depth 10 --recon-depth 10 --output "1080_hevc.mkv" "1080.avs"
 
 REM Enable/Disable encodes
 set encode_x264_480=true
@@ -20,6 +20,12 @@ set encode_x265_1080=false
 REM eac3to settings
 set audio_AAC=eac3to src.m2ts 2: audio.mp4 -quality=0.6
 set audio_FLAC=eac3to src.m2ts 2: audio.flac -down16
+
+REM Audio Commentary
+set encode_commentary=false
+set commentary_input=eac3to src.m2ts 3:
+set commentary_parameters_aac=-quality=0.6
+set commentary_parameters_flac=-down16
 
 REM Settings for release folders
 set group=Doki
@@ -154,6 +160,11 @@ if exist "Ep %episodeNumber%" (
         if not exist "audio.mp4" @echo Encoding %folderName% - %episodeNumber% AAC && %audio_AAC% && @echo.
         if not exist "audio.flac" @echo Encoding %folderName% - %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
+        if %encode_commentary%==true (
+            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
+            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
+            if exist "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt"
+        )
         if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
         if exist "480.avs" (
             if %encode_x264_480%==true (
@@ -320,6 +331,11 @@ if exist "Special %episodeNumber%" (
         if not exist "audio.mp4" @echo Encoding %folderName% - Special %episodeNumber% AAC && %audio_AAC% && @echo.
         if not exist "audio.flac" @echo Encoding %folderName% - Special %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
+        if %encode_commentary%==true (
+            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
+            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
+            if exist "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt"
+        )
         if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
         if exist "480.avs" (
             if %encode_x264_480%==true (
@@ -375,6 +391,11 @@ if exist "OVA %episodeNumber%" (
         if not exist "audio.mp4" @echo Encoding %folderName% - OVA %episodeNumber% AAC && %audio_AAC% && @echo.
         if not exist "audio.flac" @echo Encoding %folderName% - OVA %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
+        if %encode_commentary%==true (
+            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
+            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
+            if exist "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt"
+        )
         if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
         if exist "480.avs" (
             if %encode_x264_480%==true (
