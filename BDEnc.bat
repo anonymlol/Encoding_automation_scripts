@@ -357,9 +357,9 @@ if exist "Special %episodeNumber%" (
         if not exist "audio.flac" @echo Encoding %folderName% - Special %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
         if %encode_commentary%==true (
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
-            if exist "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt"
+            if not exist "[%group%] %folderName% - Commentary Special %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary Special %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary Special %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
+            if not exist "[%group%] %folderName% - Commentary Special %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary Special %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary Special %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
+            if exist "[%group%] %folderName% - Commentary Special %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary Special %episodeNumber% - Log.txt"
         )
         if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
         if exist "480.avs" (
@@ -417,9 +417,9 @@ if exist "OVA %episodeNumber%" (
         if not exist "audio.flac" @echo Encoding %folderName% - OVA %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
         if %encode_commentary%==true (
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
-            if exist "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt"
+            if not exist "[%group%] %folderName% - Commentary OVA %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary OVA %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary OVA %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
+            if not exist "[%group%] %folderName% - Commentary OVA %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary OVA %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary OVA %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
+            if exist "[%group%] %folderName% - Commentary OVA %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary OVA %episodeNumber% - Log.txt"
         )
         if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
         if exist "480.avs" (
@@ -527,9 +527,9 @@ if exist "%custom_prefix_01% %episodeNumber%" (
         if not exist "audio.flac" @echo Encoding %folderName% - %custom_prefix_01% %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
         if %encode_commentary%==true (
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
-            if exist "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt"
+            if not exist "[%group%] %folderName% - Commentary %custom_prefix_01% %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %custom_prefix_01% %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %custom_prefix_01% %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
+            if not exist "[%group%] %folderName% - Commentary %custom_prefix_01% %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %custom_prefix_01% %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %custom_prefix_01% %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
+            if exist "[%group%] %folderName% - Commentary %custom_prefix_01% %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %custom_prefix_01% %episodeNumber% - Log.txt"
         )
         if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
         if exist "480.avs" (
@@ -587,9 +587,9 @@ if exist "%custom_prefix_02% %episodeNumber%" (
         if not exist "audio.flac" @echo Encoding %folderName% - %custom_prefix_02% %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
         if %encode_commentary%==true (
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
-            if exist "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt"
+            if not exist "[%group%] %folderName% - Commentary %custom_prefix_02% %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %custom_prefix_02% %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %custom_prefix_02% %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
+            if not exist "[%group%] %folderName% - Commentary %custom_prefix_02% %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %custom_prefix_02% %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %custom_prefix_02% %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
+            if exist "[%group%] %folderName% - Commentary %custom_prefix_02% %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %custom_prefix_02% %episodeNumber% - Log.txt"
         )
         if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
         if exist "480.avs" (
@@ -647,9 +647,9 @@ if exist "%custom_prefix_03% %episodeNumber%" (
         if not exist "audio.flac" @echo Encoding %folderName% - %custom_prefix_03% %episodeNumber% FLAC && %audio_FLAC% && @echo.
         if exist "audio - Log.txt" del "audio - Log.txt"
         if %encode_commentary%==true (
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
-            if not exist "[%group%] %folderName% - Commentary %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
-            if exist "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %episodeNumber% - Log.txt"
+            if not exist "[%group%] %folderName% - Commentary %custom_prefix_03% %episodeNumber%.m4a" @echo Encoding "[%group%] %folderName% - Commentary %custom_prefix_03% %episodeNumber%.m4a" && %commentary_input% "[%group%] %folderName% - Commentary %custom_prefix_03% %episodeNumber%.m4a" %commentary_parameters_aac% && @echo.
+            if not exist "[%group%] %folderName% - Commentary %custom_prefix_03% %episodeNumber%.flac" @echo Encoding "[%group%] %folderName% - Commentary %custom_prefix_03% %episodeNumber%.flac" && %commentary_input% "[%group%] %folderName% - Commentary %custom_prefix_03% %episodeNumber%.flac" %commentary_parameters_flac% && @echo.
+            if exist "[%group%] %folderName% - Commentary %custom_prefix_03% %episodeNumber% - Log.txt" del "[%group%] %folderName% - Commentary %custom_prefix_03% %episodeNumber% - Log.txt"
         )
         if %FilterPass%==true if not exist "lossless.mkv" @echo Encoding FilterPass lossless && %Enc_Lossless% && @echo.
         if exist "480.avs" (
