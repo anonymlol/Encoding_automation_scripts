@@ -7,9 +7,8 @@ REM - node: https://nodejs.org/
 REM - create-torrent: https://github.com/feross/create-torrent
 
 REM Installation:
-REM 1. Download and install node 
-REM 2. Open cmd, navigate to the location you want to save 'create-torrent' and type 'npm install create-torrent'
-REM 3. Adjust the path in the setting below to your 'create-torrent' location
+REM 1. Download and install node
+REM 2. Open cmd, type 'npm install -g create-torrent'
 
 REM Usage: create-torrent <directory OR file> [OPTIONS]
 REM -o, --outfile    Output file. If not specified, stdout is used [string]
@@ -22,8 +21,8 @@ REM --pieceLength    Piece length [number] [default: reasonable length]
 REM --announce       Tracker url [string] [default: reasonable trackers]
 REM --urlList        Web seed url [string]
 
-REM Set your path
-set create-torrent=node "C:\YOURPATH\node_modules\create-torrent\bin\cmd.js"
+REM create-torrent path, no need to change
+set create-torrent=call create-torrent
 
 echo 1) AniDex + Minglong
 echo 2) AniDex
