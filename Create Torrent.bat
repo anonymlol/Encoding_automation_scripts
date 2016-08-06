@@ -2,11 +2,11 @@
 
 REM Either drag & drop the folder(s)/file(s) onto the bat or put this into your "send to" folder (Win+R, type "shell:sendto")
 
-REM Installation:
+REM Install:
 REM 1. Download and install node from https://nodejs.org/
 REM 2. Open cmd, type 'npm install -g create-torrent'
 
-REM Uninstallation:
+REM Uninstall:
 REM Open cmd, type 'npm uninstall -g create-torrent'
 
 REM Usage: create-torrent <directory OR file> [OPTIONS]
