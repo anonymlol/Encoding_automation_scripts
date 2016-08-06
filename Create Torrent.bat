@@ -2,13 +2,12 @@
 
 REM Either drag & drop the folder(s)/file(s) onto the bat or put this into your "send to" folder (Win+R, type "shell:sendto")
 
-REM Requirements: 
-REM - node: https://nodejs.org/
-REM - create-torrent: https://github.com/feross/create-torrent
-
 REM Installation:
-REM 1. Download and install node
+REM 1. Download and install node from https://nodejs.org/
 REM 2. Open cmd, type 'npm install -g create-torrent'
+
+REM Uninstallation:
+REM Open cmd, type 'npm uninstall -g create-torrent'
 
 REM Usage: create-torrent <directory OR file> [OPTIONS]
 REM -o, --outfile    Output file. If not specified, stdout is used [string]
