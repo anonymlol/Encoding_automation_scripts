@@ -27,8 +27,9 @@ set commentary_input=eac3to src.m2ts 3:
 set commentary_parameters_aac=-quality=0.6
 set commentary_parameters_flac=-down16
 
-REM Settings for release folders
+REM Settings for creating release folders, adjust the number of volumes according to your needs.
 set group=Doki
+set number_of_volumes=6
 set create_release_folders=true
 
 REM eac3to pgs (.sup) demux settings, switch to "true" and adjust the track number (:5) accordingly if you want to enable it.
@@ -100,11 +101,26 @@ set custom_prefix_03=placeholder_03
 
 for %%A in ("%CD%") do set "folderName=%%~nxA"
 
-if %encode_x264_480%==true if not exist "%folderName% (*) [%group%][%Tags_480_x264%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_480_x264%]"
-if %encode_x264_720%==true if not exist "%folderName% (*) [%group%][%Tags_720_x264%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_720_x264%]"
-if %encode_x264_1080%==true if not exist "%folderName% (*) [%group%][%Tags_1080_x264%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_1080_x264%]"
-if %encode_x265_720%==true if not exist "%folderName% (*) [%group%][%Tags_720_x265%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_720_x265%]"
-if %encode_x265_1080%==true if not exist "%folderName% (*) [%group%][%Tags_1080_x265%]" if %create_release_folders%==true md "%folderName% () [%group%][%Tags_1080_x265%]"
+if %encode_x264_480%==true if not exist "./Release Folders/%folderName% (*) [%group%][%Tags_480_x264%]" if %create_release_folders%==true md "./Release Folders/%folderName% () [%group%][%Tags_480_x264%]"
+if %encode_x264_720%==true if not exist "./Release Folders/%folderName% (*) [%group%][%Tags_720_x264%]" if %create_release_folders%==true md "./Release Folders/%folderName% () [%group%][%Tags_720_x264%]"
+if %encode_x264_1080%==true if not exist "./Release Folders/%folderName% (*) [%group%][%Tags_1080_x264%]" if %create_release_folders%==true md "./Release Folders/%folderName% () [%group%][%Tags_1080_x264%]"
+if %encode_x265_720%==true if not exist "./Release Folders/%folderName% (*) [%group%][%Tags_720_x265%]" if %create_release_folders%==true md "./Release Folders/%folderName% () [%group%][%Tags_720_x265%]"
+if %encode_x265_1080%==true if not exist "./Release Folders/%folderName% (*) [%group%][%Tags_1080_x265%]" if %create_release_folders%==true md "./Release Folders/%folderName% () [%group%][%Tags_1080_x265%]"
+
+set volumeCount=0
+:volume_loop
+set /a volumeCount=volumeCount+1
+
+if %volumeCount% LSS 10 set volumeNumber=0%volumeCount%
+if %volumeCount% GEQ 10 set volumeNumber=%volumeCount%
+
+if %encode_x264_480%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_480_x264%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_480_x264%]"
+if %encode_x264_720%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_720_x264%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_720_x264%]"
+if %encode_x264_1080%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_1080_x264%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_1080_x264%]"
+if %encode_x265_720%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_720_x265%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_720_x265%]"
+if %encode_x265_1080%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_1080_x265%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_1080_x265%]"
+
+if not %volumeCount% == %number_of_volumes% goto :volume_loop
 
 @echo.
 @echo Show: %folderName%
