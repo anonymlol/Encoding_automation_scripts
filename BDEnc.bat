@@ -111,14 +111,11 @@ set volumeCount=0
 :volume_loop
 set /a volumeCount=volumeCount+1
 
-if %volumeCount% LSS 10 set volumeNumber=0%volumeCount%
-if %volumeCount% GEQ 10 set volumeNumber=%volumeCount%
-
-if %encode_x264_480%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_480_x264%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_480_x264%]"
-if %encode_x264_720%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_720_x264%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_720_x264%]"
-if %encode_x264_1080%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_1080_x264%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_1080_x264%]"
-if %encode_x265_720%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_720_x265%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_720_x265%]"
-if %encode_x265_1080%==true if not exist "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_1080_x265%]" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - %volumeNumber% [%Tags_1080_x265%]"
+if %encode_x264_480%==true if not exist "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_480_x264%)" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_480_x264%)"
+if %encode_x264_720%==true if not exist "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_720_x264%)" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_720_x264%)"
+if %encode_x264_1080%==true if not exist "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_1080_x264%)" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_1080_x264%)"
+if %encode_x265_720%==true if not exist "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_720_x265%)" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_720_x265%)"
+if %encode_x265_1080%==true if not exist "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_1080_x265%)" if %create_release_folders%==true md "./Release Folders/[%group%] %folderName% - Vol %volumeCount% (%Tags_1080_x265%)"
 
 if not %volumeCount% == %number_of_volumes% goto :volume_loop
 
