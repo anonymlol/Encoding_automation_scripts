@@ -1,5 +1,5 @@
 ### Install.bat
-Installs node and saves scripts and binaries to C:\Doki_Tools and %appdata%\Microsoft\Windows\SendTo
+Installs node and saves scripts and binaries to "C:\Doki_Tools" and "%appdata%\Microsoft\Windows\SendTo"
 
 ### New BD/TV Directory.bat
 These create directories for BDEnc or TVEnc.
