@@ -137,7 +137,7 @@ if exist "%sendto_path%\Create_Filelist.bat" if /I "%overwrite%"=="n" echo Skipp
 if not exist "%sendto_path%\Create_Filelist.bat" powershell Start-BitsTransfer %filelist_url% "%sendto_path%" && echo Copied Create_Filelist.bat
 
 echo.
-echo All done! Or so you thought...
+echo Done!
 echo.
 
 pause
