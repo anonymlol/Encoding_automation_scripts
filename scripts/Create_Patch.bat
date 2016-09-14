@@ -1,13 +1,10 @@
 @echo off
 REM Usage: Select both files, but right-click/send-to (or drag & drop) only the source (unpatched) file!
 
-if exist C:\Doki_Tools\bin set xdeltaPATH=C:\Doki_Tools\bin
-if exist C:\Doki_Tools\scripts set scriptsPATH=C:\Doki_Tools\scripts
-
 REM Set paths
-set xdelta_binary=%xdeltaPATH%\xdelta3.exe
-set windows_script=%scriptsPATH%\Apply_Patch_Windows.bat
-set linux_mac_script=%scriptsPATH%\Apply_Patch_Linux_and_Mac.sh
+set xdelta_binary=C:\Doki_Tools\bin\xdelta3.exe
+set windows_script=C:\Doki_Tools\scripts\Apply_Patch_Windows.bat
+set linux_mac_script=C:\Doki_Tools\scripts\Apply_Patch_Linux_and_Mac.sh
 
 cd "%~dp1"
 if not exist "Patches" md "Patches"
