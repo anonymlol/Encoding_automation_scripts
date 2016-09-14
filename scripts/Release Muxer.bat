@@ -7,6 +7,7 @@ REM Right-click the final subfile, send-to: Release Muxer // Or drag & drop subf
 cd %~p1
 for %%A in ("%CD%") do set "folderName=%%~nxA"
 for %%A in ("%~dp1..") do set "Showname=%%~nxA"
+if exist C:\Doki_Tools\bin set PATH=%PATH%;C:\Doki_Tools\bin
 
 REM Settings
 set group=[Doki]

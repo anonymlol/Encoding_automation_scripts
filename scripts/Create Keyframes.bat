@@ -5,6 +5,8 @@ REM Requirements
 REM * SCXvid-standalone: https://github.com/soyokaze/SCXvid-standalone/releases
 REM * FFmpeg: http://ffmpeg.zeranoe.com/builds/
 
+if exist C:\Doki_Tools\bin set PATH=%PATH%;C:\Doki_Tools\bin
+
 echo Creating Keyframes...
 set video="%~1"
 set video2="%~n1"

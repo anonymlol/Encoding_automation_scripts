@@ -20,6 +20,8 @@ REM --pieceLength    Piece length [number] [default: reasonable length]
 REM --announce       Tracker url [string] [default: reasonable trackers]
 REM --urlList        Web seed url [string]
 
+if exist C:\Doki_Tools\node_modules\.bin set PATH=%PATH%;C:\Doki_Tools\node_modules\.bin
+
 REM create-torrent path, no need to change
 set create-torrent=call create-torrent
 
