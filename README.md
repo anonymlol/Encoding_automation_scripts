@@ -2,9 +2,9 @@
 Installs node and saves scripts and binaries to "C:\Doki_Tools" and "%appdata%\Microsoft\Windows\SendTo"
 
 ### New BD/TV Directory.bat
-These create directories for BDEnc or TVEnc.
+These create directories for Encode_BD or Encode_TV.
 
-### Encode BD.bat (Blu-Ray Anime Encode Script)
+### Encode_BD (Blu-Ray Anime Encode Script)
 - Renames the source files (i.e. "00000.m2ts" to "src.m2ts")
 - Copies .avs files from a previous directory (default "Ep 01")
 - Indexes the source
@@ -18,16 +18,21 @@ A specific folder structure is necessary. Use "New BD/TV Directory.bat".
 
 For piping to 64-bit x264/x265, you need [avs4x26x](http://forum.doom9.org/showthread.php?t=162656).
 
-### Encode TV.bat (TV Anime Encode Script)
+### Encode_TV (TV Anime Encode Script)
 Encodes, muxes, names and uploads (ftp) TV encodes. 
 
 Needs [wput](http://wput.sourceforge.net/) for uploading and [vfr.py](https://github.com/wiiaboo/vfr/releases) for trimming the audio.
 
-### Release Muxer
-A script for quickly muxing the finished episodes for release.
+### Release_Muxer
+Muxes finished episodes for release.
 
-### Create Torrent
-A script for quickly creating torrent files.
+### Create_Torrent
+Can create multiple torrent files at once. Comes with multiple trackers preset.
 
-### Create Patch
-A script for quickly creating patches for your episodes.
+### Create_Patch
+Creates patches quickly.
+Usage: Select both files, but right-click/send-to (or drag & drop) only the source (unpatched) file!
+Hint: You'll know you did it right if the patch file has the same name as the unpatched source.
+
+### Create_Filelist
+Creates a text file folder/file names. Useful for release posts.
