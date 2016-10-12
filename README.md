@@ -37,4 +37,4 @@ Usage: Select both files, but right-click/send-to (or drag & drop) only the sour
 Hint: You'll know you did it right if the patch file has the same name as the unpatched source.
 
 ### Create_Filelist
-Creates a text file folder/file names. Useful for release posts.
+Creates a text file containing folder/file names. Useful for release posts.
