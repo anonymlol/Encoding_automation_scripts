@@ -20,6 +20,7 @@ set ct_tvencdir_url="%scripts_url%/New_TV_Directory.bat"
 set release_muxer_url="%scripts_url%/Release_Muxer.bat"
 set patch_maker_url="%scripts_url%/Create_Patch.bat"
 set filelist_url="%scripts_url%/Create_Filelist.bat"
+set create_index_file_url="%scripts_url%/Create_Index_File.bat"
 set create_torrent_url="%scripts_url%/Create_Torrent.bat"
 set create_keyframes_url="%scripts_url%/Create_Keyframes.bat"
 set win_patcher_url="%scripts_url%/Apply_Patch_Windows.bat"
@@ -27,7 +28,7 @@ set linux_patcher_url="%scripts_url%/Apply_Patch_Linux_and_Mac.sh"
 
 echo #####################################
 echo #                                   #
-echo #  Doki_Tools Install Script 0.1.0  #
+echo #  Doki_Tools Install Script 0.1.1  #
 echo #                                   #
 echo #####################################
 echo.
@@ -135,6 +136,10 @@ if not exist "%sendto_path%\Create_Patch.bat" powershell Start-BitsTransfer %pat
 if exist "%sendto_path%\Create_Filelist.bat" if /I "%overwrite%"=="y" powershell Start-BitsTransfer %filelist_url% "%sendto_path%" && echo Overwrote Create_Filelist.bat
 if exist "%sendto_path%\Create_Filelist.bat" if /I "%overwrite%"=="n" echo Skipped Create_Filelist.bat
 if not exist "%sendto_path%\Create_Filelist.bat" powershell Start-BitsTransfer %filelist_url% "%sendto_path%" && echo Copied Create_Filelist.bat
+
+if exist "%sendto_path%\Create_Index_File.bat" if /I "%overwrite%"=="y" powershell Start-BitsTransfer %create_index_file_url% "%sendto_path%" && echo Overwrote Create_Index_File.bat
+if exist "%sendto_path%\Create_Index_File.bat" if /I "%overwrite%"=="n" echo Skipped Create_Index_File.bat
+if not exist "%sendto_path%\Create_Index_File.bat" powershell Start-BitsTransfer %create_index_file_url% "%sendto_path%" && echo Copied Create_Index_File.bat
 
 echo.
 echo Done!
