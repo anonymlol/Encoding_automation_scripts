@@ -2,7 +2,7 @@
 
 REM Install directories are C:\Doki_Tools and %userprofile%\AppData\Roaming\Microsoft\Windows\SendTo
 
-REM Arrays of files to download
+REM List of files to download
 set binaries=^
 rhash.exe ^
 xdelta3.exe ^
