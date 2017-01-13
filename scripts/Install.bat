@@ -36,7 +36,7 @@ set node_url=https://nodejs.org/dist/%node_version%/node-%node_version%-x64.msi
 
 echo #####################################
 echo #                                   #
-echo #  Doki_Tools Install Script 0.2.1  #
+echo #  Doki_Tools Install Script 0.2.2  #
 echo #                                   #
 echo #####################################
 echo.
