@@ -26,7 +26,7 @@ Create_Patch.bat ^
 Create_Torrent.bat 
 
 REM Various URLs/Paths
-set node_version=v6.9.2
+set node_version=v6.9.4
 set install_dir=C:\Doki_Tools
 set sendto_path=%appdata%\Microsoft\Windows\SendTo
 set bin_url=https://github.com/anonymlol/Encoding_automation_scripts/raw/master/bin
