@@ -27,9 +27,8 @@ set create-torrent=call create-torrent
 
 echo 1) AniDex + Minglong
 echo 2) AniDex
-echo 3) Nyaa
-echo 4) BakaBT
-echo 5) AsianDVDClub
+echo 3) BakaBT
+echo 4) AsianDVDClub
 
 echo.
 set /p target_tracker=Choose Tracker: 
@@ -39,9 +38,8 @@ echo.
 echo Hashing "%~nx1"
 if %target_tracker%==1 %create-torrent% "%~1" --announce "http://anidex.moe:6969/announce" --announce "http://tracker.minglong.org:8080/announce" -o "%~1.torrent"
 if %target_tracker%==2 %create-torrent% "%~1" --announce "http://anidex.moe:6969/announce" -o "%~1.torrent"
-if %target_tracker%==3 %create-torrent% "%~1" --announce "http://open.nyaatorrents.info:6544/announce" -o "%~1.torrent"
-if %target_tracker%==4 %create-torrent% "%~1" --announce "http://tracker.bakabt.me:2710/announce.php" --private -o "%~1.torrent"
-if %target_tracker%==5 %create-torrent% "%~1" --announce "http://announce.asiandvdclub.org/" --private -o "%~1.torrent"
+if %target_tracker%==3 %create-torrent% "%~1" --announce "http://tracker.bakabt.me:2710/announce.php" --private -o "%~1.torrent"
+if %target_tracker%==4 %create-torrent% "%~1" --announce "http://announce.asiandvdclub.org/" --private -o "%~1.torrent"
 shift
 if not "%~1"=="" goto :loop
 
