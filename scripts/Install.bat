@@ -17,7 +17,8 @@ Apply_Patch_Linux_and_Mac.sh ^
 Encode_BD.bat ^
 Encode_TV.bat ^
 New_BD_Directory.bat ^
-New_TV_Directory.bat
+New_TV_Directory.bat ^
+API_Upload_Nyaa.py
 
 set sendto_scripts=^
 Create_Filelist.bat ^
@@ -26,10 +27,11 @@ Create_Keyframes.bat ^
 Release_Muxer.bat ^
 Create_Patch.bat ^
 Create_Torrent.bat ^
-Convert_Image.bat
+Convert_Image.bat ^
+Upload_Torrent.bat
 
 REM Various URLs/Paths
-set node_version=v6.10.2
+set node_version=v6.10.3
 set install_dir=C:\Doki_Tools
 set sendto_path=%appdata%\Microsoft\Windows\SendTo
 set bin_url=https://github.com/anonymlol/Encoding_automation_scripts/raw/master/bin
