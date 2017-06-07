@@ -32,9 +32,8 @@ Can create multiple torrent files at once. Comes with multiple trackers preset.
 ### Create_Patch
 Creates patches quickly.
 
-Usage: Select both files, but right-click/send-to (or drag & drop) only the source (unpatched) file!
+Usage: Select both files and right-click/send-to (or drag & drop) to the batch file!
 
-Hint: You'll know you did it right if the patch file has the same name as the unpatched source.
 
 ### Create_Filelist
 Creates a text file containing folder/file names. Useful for release posts.
