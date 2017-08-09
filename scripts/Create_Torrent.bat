@@ -26,7 +26,7 @@ REM create-torrent path, no need to change
 set create-torrent=call create-torrent
 
 echo 1) AniDex + Minglong + Nyaa
-echo 2) AniDex + Nyaa
+echo 2) AniDex + Minglong + Sukebei
 echo 3) AniDex
 echo 4) BakaBT
 echo 5) AsianDVDClub
@@ -38,7 +38,7 @@ echo.
 :loop
 echo Hashing "%~nx1"
 if %target_tracker%==1 %create-torrent% "%~1" --announce "http://anidex.moe:6969/announce" --announce "http://tracker.minglong.org:8080/announce" --announce "http://nyaa.tracker.wf:7777/announce" -o "%~1.torrent"
-if %target_tracker%==2 %create-torrent% "%~1" --announce "http://anidex.moe:6969/announce" --announce "http://nyaa.tracker.wf:7777/announce" -o "%~1.torrent"
+if %target_tracker%==2 %create-torrent% "%~1" --announce "http://anidex.moe:6969/announce" --announce "http://tracker.minglong.org:8080/announce" --announce "http://sukebei.tracker.wf:8888/announce" -o "%~1.torrent"
 if %target_tracker%==3 %create-torrent% "%~1" --announce "http://anidex.moe:6969/announce" -o "%~1.torrent"
 if %target_tracker%==4 %create-torrent% "%~1" --announce "http://tracker.bakabt.me:2710/announce.php" --private -o "%~1.torrent"
 if %target_tracker%==5 %create-torrent% "%~1" --announce "http://announce.asiandvdclub.org/" --private -o "%~1.torrent"
