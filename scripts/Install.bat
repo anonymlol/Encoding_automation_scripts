@@ -27,11 +27,10 @@ Create_Keyframes.bat ^
 Release_Muxer.bat ^
 Create_Patch.bat ^
 Create_Torrent.bat ^
-Convert_Image.bat ^
-Upload_Torrent.bat
+Convert_Image.bat
 
 REM Various URLs/Paths
-set node_version=v6.10.3
+set node_version=v6.11.2
 set install_dir=C:\Doki_Tools
 set sendto_path=%appdata%\Microsoft\Windows\SendTo
 set bin_url=https://github.com/anonymlol/Encoding_automation_scripts/raw/master/bin
@@ -41,7 +40,7 @@ set node_url=https://nodejs.org/dist/%node_version%/node-%node_version%-x64.msi
 
 echo #####################################
 echo #                                   #
-echo #  Doki_Tools Install Script 0.3.1  #
+echo #  Doki_Tools Install Script 0.3.2  #
 echo #                                   #
 echo #####################################
 echo.
