@@ -39,7 +39,7 @@ set install_dir=C:\Doki_Tools
 set sendto_path=%appdata%\Microsoft\Windows\SendTo
 set bin_url=https://github.com/anonymlol/Encoding_automation_scripts/raw/master/bin
 set scripts_url=https://raw.githubusercontent.com/anonymlol/Encoding_automation_scripts/master/scripts
-set settings_url=https://raw.githubusercontent.com/anonymlol/Encoding_automation_scripts/master/keys
+set settings_url=https://raw.githubusercontent.com/anonymlol/Encoding_automation_scripts/master/settings
 set node_url=https://nodejs.org/dist/%node_version%/node-%node_version%-x64.msi
 
 
