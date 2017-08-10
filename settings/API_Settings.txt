@@ -1,0 +1,10 @@
+anidex_api_key=
+group_id=1
+
+;TokyoTosho API (off=0, on=1)
+tokyotosho_api=1
+
+nyaa_username=Doki
+nyaa_password=
+nyaa_info=https://doki.co
+nyaa_description=[#doki@irc.rizon.net]^(irc://irc.rizon.net/doki^)

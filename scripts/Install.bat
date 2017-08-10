@@ -27,7 +27,11 @@ Create_Keyframes.bat ^
 Release_Muxer.bat ^
 Create_Patch.bat ^
 Create_Torrent.bat ^
-Convert_Image.bat
+Convert_Image.bat ^
+Upload_Torrent.bat
+
+set settings=^
+API_Settings.txt
 
 REM Various URLs/Paths
 set node_version=v6.11.2
@@ -35,12 +39,13 @@ set install_dir=C:\Doki_Tools
 set sendto_path=%appdata%\Microsoft\Windows\SendTo
 set bin_url=https://github.com/anonymlol/Encoding_automation_scripts/raw/master/bin
 set scripts_url=https://raw.githubusercontent.com/anonymlol/Encoding_automation_scripts/master/scripts
+set settings_url=https://raw.githubusercontent.com/anonymlol/Encoding_automation_scripts/master/keys
 set node_url=https://nodejs.org/dist/%node_version%/node-%node_version%-x64.msi
 
 
 echo #####################################
 echo #                                   #
-echo #  Doki_Tools Install Script 0.3.2  #
+echo #  Doki_Tools Install Script 0.4.0  #
 echo #                                   #
 echo #####################################
 echo.
@@ -53,6 +58,7 @@ echo.
 if not exist "%install_dir%" md "%install_dir%" 
 if not exist "%install_dir%\bin" md "%install_dir%\bin"
 if not exist "%install_dir%\scripts" md "%install_dir%\scripts"
+if not exist "%install_dir%\settings" md "%install_dir%\settings"
 echo.
 
 if exist "%PROGRAMFILES%\nodejs\node.exe" echo Node found. Proceeding...
@@ -103,6 +109,11 @@ for %%a in (%sendto_scripts%) do (
     if exist "%sendto_path%\%%a" if /I "%overwrite%"=="n" echo Skipped %%a
     if not exist "%sendto_path%\%%a" powershell Start-BitsTransfer %scripts_url%/%%a "%sendto_path%" && echo Copied %%a
 )
+
+for %%a in (%settings%) do (
+    if not exist "%install_dir%\settings\%%a" powershell Start-BitsTransfer %settings_url%/%%a "%install_dir%\settings" && echo Copied %%a
+)
+
 
 echo.
 echo Done!
