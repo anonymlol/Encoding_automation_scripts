@@ -52,8 +52,15 @@ if %EpisodeCount%==0 goto :NC_Step
 set Episode_Counter=0
 :EpisodeLoop
 set /a Episode_Counter=Episode_Counter+1
-if %Episode_Counter% LSS 10 set episodeNumber=0%Episode_Counter%
-if %Episode_Counter% GEQ 10 set episodeNumber=%Episode_Counter%
+if %EpisodeCount% GEQ 100 (
+    if %Episode_Counter% LSS 100 set episodeNumber=0%Episode_Counter%
+    if %Episode_Counter% LSS 10 set episodeNumber=00%Episode_Counter%
+    if %Episode_Counter% GEQ 100 set episodeNumber=%Episode_Counter%
+)
+if %EpisodeCount% LSS 100 (
+    if %Episode_Counter% LSS 10 set episodeNumber=0%Episode_Counter%
+    if %Episode_Counter% GEQ 10 set episodeNumber=%Episode_Counter%
+)
 if not exist "Ep %episodeNumber%" md "Ep %episodeNumber%"
 if not %Episode_Counter% == %EpisodeCount% goto :EpisodeLoop
 
