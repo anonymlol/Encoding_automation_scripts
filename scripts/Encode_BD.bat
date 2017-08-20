@@ -167,7 +167,7 @@ if exist "Ep %episodeNumber%" (
                     @echo.
                 )
             )
-            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "480.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "480.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%encodeName% Keyframes.txt" && @echo Done && @echo.
+            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "480.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "480.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%folderName% - %episodeNumber% Keyframes.txt" && @echo Done && @echo.
         )
         if exist "720.avs" (
             if %encode_x264_720%==true (
@@ -179,7 +179,7 @@ if exist "Ep %episodeNumber%" (
                     @echo.
                 )
             )
-            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "720.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "720.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%encodeName% Keyframes.txt" && @echo Done && @echo.
+            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "720.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "720.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%folderName% - %episodeNumber% Keyframes.txt" && @echo Done && @echo.
             if %encode_x265_720%==true (
                 if not exist "720_hevc.mkv" @echo Encoding %folderName% - %episodeNumber% 720p HEVC && %x265_720% && @echo.
                 if not exist "%folderName% - %episodeNumber% (%Tags_720_x265%).mkv" (
@@ -189,7 +189,7 @@ if exist "Ep %episodeNumber%" (
                     @echo.
                 )
             )
-            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "720_hevc.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "720_hevc.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%encodeName% Keyframes.txt" && @echo Done && @echo.
+            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "720_hevc.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "720_hevc.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%folderName% - %episodeNumber% Keyframes.txt" && @echo Done && @echo.
         )
         if exist "1080.avs" (
             if %encode_x264_1080%==true (
@@ -201,7 +201,7 @@ if exist "Ep %episodeNumber%" (
                     @echo.
                 )
             )
-            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "1080.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "1080.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%encodeName% Keyframes.txt" && @echo Done && @echo.
+            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "1080.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "1080.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%folderName% - %episodeNumber% Keyframes.txt" && @echo Done && @echo.
             if %encode_x265_1080%==true (
                 if not exist "1080_hevc.mkv" @echo Encoding %folderName% - %episodeNumber% 1080p HEVC && %x265_1080% && @echo.
                 if not exist "%folderName% - %episodeNumber% (%Tags_1080_x265%).mkv" (
@@ -211,7 +211,7 @@ if exist "Ep %episodeNumber%" (
                     @echo.
                 )
             )
-            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "1080_hevc.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "1080_hevc.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%encodeName% Keyframes.txt" && @echo Done && @echo.
+            if %keyframes%==true if not exist "%folderName% - %episodeNumber% Keyframes.txt" if exist "1080_hevc.mkv" @echo Creating Keyframes && %ffmpeg_path% -i "1080_hevc.mkv" -f yuv4mpegpipe -vf scale=640:360 -pix_fmt yuv420p -vsync drop -loglevel quiet - | %SCXvid_path% "%folderName% - %episodeNumber% Keyframes.txt" && @echo Done && @echo.
         )
     )
     @echo.
