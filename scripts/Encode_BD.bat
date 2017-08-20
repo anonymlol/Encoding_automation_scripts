@@ -125,8 +125,15 @@ set folderCount=0
 :loop
 set /a folderCount=folderCount+1
 
-if %folderCount% LSS 10 set episodeNumber=0%folderCount%
-if %folderCount% GEQ 10 set episodeNumber=%folderCount%
+if %Episodes% GEQ 100 (
+    if %folderCount% LSS 100 set episodeNumber=0%folderCount%
+    if %folderCount% LSS 10 set episodeNumber=00%folderCount%
+    if %folderCount% GEQ 100 set episodeNumber=%folderCount%
+)
+if %Episodes% LSS 100 (
+    if %folderCount% LSS 10 set episodeNumber=0%folderCount%
+    if %folderCount% GEQ 10 set episodeNumber=%folderCount%
+)
 
 if exist "Ep %episodeNumber%" (
     @echo -----------------------------------Episode %episodeNumber%-----------------------------------
