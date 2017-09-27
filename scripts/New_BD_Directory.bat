@@ -37,6 +37,14 @@ set /p OVACount="Enter Number of OVAs: "
     goto :RetryOVACount
 )
 
+:RetryMovieCount
+set /p MovieCount="Enter Number of Movies: "
+@echo %MovieCount%|findstr /xr "[1-9][0-9]* 0" >nul && (
+    @echo. ) || (
+    @echo Not a valid number!
+    goto :RetryMovieCount
+)
+
 :RetryBDMenuCount
 set /p BDMenuCount="Enter Number of BD Menus: "
 @echo %BDMenuCount%|findstr /xr "[1-9][0-9]* 0" >nul && (
@@ -64,7 +72,6 @@ if %EpisodeCount% LSS 100 (
 if not exist "Ep %episodeNumber%" md "Ep %episodeNumber%"
 if not %Episode_Counter% == %EpisodeCount% goto :EpisodeLoop
 
-
 :NC_Step
 if %NCCount%==0 goto :Special_Step
 set NC_Counter=0
@@ -86,9 +93,8 @@ if %Special_Counter% GEQ 10 set Special_Number=%Special_Counter%
 if not exist "Special %Special_Number%" md "Special %Special_Number%"
 if not %Special_Counter% == %SpecialCount% goto :SpecialLoop
 
-
 :OVA_Step
-if %OVACount%==0 goto :Last_Step
+if %OVACount%==0 goto :Movie_Step
 set OVA_Counter=0
 :OVALoop
 set /a OVA_Counter=OVA_Counter+1
@@ -97,6 +103,16 @@ if %OVA_Counter% GEQ 10 set OVA_Number=%OVA_Counter%
 if not exist "OVA %OVA_Number%" md "OVA %OVA_Number%"
 if not %OVA_Counter% == %OVACount% goto :OVALoop
 
+:Movie_Step
+if %MovieCount%==0 goto :BDMenu_Step
+set Movie_Counter=0
+:MovieLoop
+set /a Movie_Counter=Movie_Counter+1
+if %Movie_Counter% LSS 10 set Movie_Number=0%Movie_Counter%
+if %Movie_Counter% GEQ 10 set Movie_Number=%Movie_Counter%
+if not exist "Movie %Movie_Number%" md "Movie %Movie_Number%"
+if not %Movie_Counter% == %MovieCount% goto :MovieLoop
+
 :BDMenu_Step
 if %BDMenuCount%==0 goto :Last_Step
 set BDMenu_Counter=0
@@ -104,12 +120,14 @@ set BDMenu_Counter=0
 set /a BDMenu_Counter=BDMenu_Counter+1
 if %BDMenu_Counter% LSS 10 set BDMenu_Number=0%BDMenu_Counter%
 if %BDMenu_Counter% GEQ 10 set BDMenu_Number=%BDMenu_Counter%
-if not exist "BD Menu %BDMenu_Number%" md "BD Menu %BDMenu_Number%"
+if not exist "Menu %BDMenu_Number%" md "Menu %BDMenu_Number%"
 if not %BDMenu_Counter% == %BDMenuCount% goto :BDMenuLoop
 
 :Last_Step
-if not exist "Ep 01" goto :end
-cd "Ep 01"
+if %EpisodeCount% GEQ 100 set template_dir="Ep 001"
+if %EpisodeCount% LSS 100 set template_dir="Ep 01"
+if not exist %template_dir% goto :end
+cd %template_dir%
 if not exist 480.avs @echo #AVCSource("src.dga") or DGSource("src.dgi") > 480.avs
 if not exist 720.avs @echo #AVCSource("src.dga") or DGSource("src.dgi") > 720.avs
 if not exist 1080.avs @echo #AVCSource("src.dga") or DGSource("src.dgi") > 1080.avs

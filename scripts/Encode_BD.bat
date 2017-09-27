@@ -84,7 +84,7 @@ set FilterPass=false
 set Enc_Lossless=x264-10bit --crf 0.0 --log-level none --output "lossless.mkv" "lossless.avs"
 
 REM Max number of episodes. Doesn't need to be changed unless you need more.
-set Episodes=100
+set Episodes=99
 
 REM All m2ts files will be renamed to this. You can disable it by switching "renameSource" to false.
 set renameSource=true
@@ -95,7 +95,7 @@ set copyScripts=true
 set avsFolder=Ep 01
 
 REM List of additional encoding folders
-set type=NCED NCOP Special OVA Menu
+set type=NCED NCOP Special OVA Menu Movie
 
 for %%A in ("%CD%") do set "folderName=%%~nxA"
 
