@@ -9,6 +9,7 @@ xdelta3.exe ^
 scxvid.exe ^
 ffmpeg.exe ^
 cwebp.exe ^
+pingo.exe ^
 nconvert.exe
 
 set scripts=^
