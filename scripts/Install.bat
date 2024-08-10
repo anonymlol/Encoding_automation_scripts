@@ -35,7 +35,7 @@ set settings=^
 API_Settings.txt
 
 REM Various URLs/Paths
-set node_version=v20.10.0
+set node_version=v20.16.0
 set install_dir=C:\Doki_Tools
 set sendto_path=%appdata%\Microsoft\Windows\SendTo
 set bin_url=https://github.com/anonymlol/Encoding_automation_scripts/raw/master/bin
@@ -46,7 +46,7 @@ set node_url=https://nodejs.org/dist/%node_version%/node-%node_version%-x64.msi
 
 echo #####################################
 echo #                                   #
-echo #  Doki_Tools Install Script 0.4.3  #
+echo #  Doki_Tools Install Script 0.4.4  #
 echo #                                   #
 echo #####################################
 echo.
